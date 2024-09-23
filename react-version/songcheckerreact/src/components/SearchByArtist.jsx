@@ -1,5 +1,3 @@
-import React from "react";
-
 function SearchByArtist() {
   const inputPlaceHolder = "Type an artist name then press enter";
   const cardTitle = "Artist name based search";
@@ -7,6 +5,7 @@ function SearchByArtist() {
   const handleEnter = (event) => {
     if (event.key === "Enter") {
       console.log("Touche entrer pressée !");
+      alert("test");
     }
   };
 

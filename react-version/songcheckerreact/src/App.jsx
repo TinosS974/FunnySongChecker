@@ -1,12 +1,15 @@
-import Navbar from "./components/Navbar";
-import Separator from "./components/Separator";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-600">
-      <Navbar />
-      <Separator />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 }
 

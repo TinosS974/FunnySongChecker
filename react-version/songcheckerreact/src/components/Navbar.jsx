@@ -1,12 +1,12 @@
-import React from "react";
-
 function Navbar() {
   const appTitle = "Song Checker";
+  let userName = "Raph"; // a transformer par le call api pour get les infos
 
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">{appTitle}</a>
+        <h2 className="">{userName}</h2>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
