@@ -1,12 +1,13 @@
-function Navbar() {
+function Navbar({ userInfo }) {
   const appTitle = "Song Checker";
-  let userName = "Raph"; // a transformer par le call api pour get les infos
 
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">{appTitle}</a>
-        <h2 className="">{userName}</h2>
+        <h2 className="mx-10 text-xl">
+          {userInfo ? `Bonjour, ${userInfo.display_name}` : "Utilisateur"}
+        </h2>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
@@ -24,8 +25,12 @@ function Navbar() {
           >
             <div className="w-10 rounded-full">
               <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                alt="Profil utilisateur"
+                src={
+                  userInfo && userInfo.images && userInfo.images.length > 0
+                    ? userInfo.images[0].url
+                    : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                }
               />
             </div>
           </div>

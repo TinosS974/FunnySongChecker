@@ -1,43 +1,51 @@
 import Navbar from "../components/Navbar";
 import Separator from "../components/Separator";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios"; // ou fetch si tu préfères
 
 function HomePage() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     // Récupérer le token depuis l'URL
     const params = new URLSearchParams(location.search);
     const accessToken = params.get("access_token");
 
-    console.log("Access token from URL:", accessToken); // Log pour vérifier le token
-
     if (accessToken) {
       // Stocker le token dans le localStorage
       localStorage.setItem("spotifyToken", accessToken);
-      console.log(
-        "Token stored in localStorage:",
-        localStorage.getItem("spotifyToken")
-      ); // Log de vérification
-
-      // Nettoyer l'URL après avoir stocké le token
       window.history.replaceState({}, document.title, "/home");
+    }
+
+    // Récupérer le token stocké dans le localStorage
+    const storedToken = localStorage.getItem("spotifyToken");
+
+    if (storedToken) {
+      // Appeler l'API backend pour obtenir les infos de l'utilisateur
+      axios
+        .get("http://localhost:5000/api/user", {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        })
+        .then((response) => {
+          setUserInfo(response.data);
+        })
+        .catch((error) => {
+          console.log("Error fetching user info:", error);
+        });
     } else {
       // Si pas de token, rediriger vers la page de login
-      const storedToken = localStorage.getItem("spotifyToken");
-      console.log("Stored token:", storedToken); // Log de vérification
-      if (!storedToken) {
-        console.log("No token found, redirecting to login");
-        navigate("/");
-      }
+      navigate("/");
     }
   }, [location, navigate]);
 
   return (
     <>
-      <Navbar />
+      <Navbar userInfo={userInfo} />
       <Separator />
     </>
   );

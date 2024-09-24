@@ -11,10 +11,12 @@ app.use(express.json());
 // Importer les routes de l'artiste depuis le dossier api
 const artistRoutes = require('./api/routes/artistRoute');
 const authRoutes = require('./api/routes/authRoute');
+const userRoutes = require('./api/routes/userRoute');
 
 // Utiliser les routes de l'artiste pour l'API
 app.use('/api/spotify', artistRoutes);
-app.use('/api', authRoutes)
+app.use('/api', authRoutes);
+app.use('/api/user', userRoutes);
 
 // Lancer le serveur
 app.listen(PORT, () => {
