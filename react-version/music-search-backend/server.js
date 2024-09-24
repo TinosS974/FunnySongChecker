@@ -12,11 +12,13 @@ app.use(express.json());
 const artistRoutes = require('./api/routes/artistRoute');
 const authRoutes = require('./api/routes/authRoute');
 const userRoutes = require('./api/routes/userRoute');
+const songRoutes = require('./api/routes/songRoute')
 
 // Utiliser les routes de l'artiste pour l'API
 app.use('/api/spotify', artistRoutes);
 app.use('/api', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/spotify', songRoutes);
 
 // Lancer le serveur
 app.listen(PORT, () => {

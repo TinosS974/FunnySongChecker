@@ -2,7 +2,7 @@ const artistService = require('../services/artistService');
 
 exports.getUserTopArtists = async (req, res) => {
     try {
-        const access_token = req.headers.authorization.split('')[1];
+        const access_token = req.headers.authorization.split(' ')[1];
         const topArtists = await artistService.getTopArtists(access_token);
         res.json(topArtists);
     } catch (error) {

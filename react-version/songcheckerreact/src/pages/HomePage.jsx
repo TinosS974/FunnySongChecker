@@ -3,6 +3,8 @@ import Separator from "../components/Separator";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios"; // ou fetch si tu préfères
+import TopArtistsSection from "../components/TopSections/TopArtistsSection";
+import TopSongsSection from "../components/TopSections/TopSongsSection";
 
 function HomePage() {
   const location = useLocation();
@@ -47,6 +49,10 @@ function HomePage() {
     <>
       <Navbar userInfo={userInfo} />
       <Separator />
+      <div className="flex">
+        <TopArtistsSection />
+        <TopSongsSection />
+      </div>
     </>
   );
 }
