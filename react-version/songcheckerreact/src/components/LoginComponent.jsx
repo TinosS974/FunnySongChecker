@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import checkToken from "../utils/checkToken";
 
 function LoginComponent() {
   const navigate = useNavigate();
@@ -8,17 +9,16 @@ function LoginComponent() {
 
   useEffect(() => {
     // Vérifier si l'utilisateur est déjà connecté
-    const token = localStorage.getItem("spotifyToken");
-    console.log("Token in localStorage:", token); // Log pour vérifier le token
-    if (token) {
-      // Rediriger vers la HomePage si déjà connecté
-      console.log("Redirecting to HomePage...");
-      navigate("/home");
-    }
+    const verifyToken = async () => {
+      const isValid = await checkToken(navigate);
+      if (isValid) {
+        navigate("/home");
+      }
+    };
+    verifyToken();
   }, [navigate]);
 
   const spotifyHandling = () => {
-    // Appeler ton backend pour démarrer l'authentification avec Spotify
     console.log("Redirecting to Spotify login...");
     window.location.href = "http://localhost:5000/api/login";
   };
