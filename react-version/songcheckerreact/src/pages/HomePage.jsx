@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios"; // ou fetch si tu préfères
 import TopArtistsSection from "../components/TopSections/TopArtistsSection";
 import TopSongsSection from "../components/TopSections/TopSongsSection";
+import RecentlyTrack from "../components/TracksSections/RecentlyTrack";
 
 function HomePage() {
   const location = useLocation();
@@ -52,6 +53,7 @@ function HomePage() {
       <div className="flex">
         <TopArtistsSection />
         <TopSongsSection />
+        <RecentlyTrack />
       </div>
     </>
   );

@@ -2,7 +2,6 @@ const axios = require('axios');
 
 exports.getTopArtists = async (accessToken) => {
   try {
-    console.log('Using access token:', accessToken);  // Log du token
     const response = await axios.get("https://api.spotify.com/v1/me/top/artists?limit=12", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
