@@ -17,8 +17,11 @@ function RecentlyTrack() {
     console.log("Recently played tracks response:", response.data);
 
     if (response.data) {
-      // Extract the 'track' objects from the response data
-      const fetchedTracks = response.data.map((item) => item.track);
+      // Map over the items and extract both 'track' and 'played_at'
+      const fetchedTracks = response.data.map((item) => ({
+        ...item.track,
+        played_at: item.played_at,
+      }));
       setTracks(fetchedTracks);
     } else {
       setTracks([]);
@@ -47,6 +50,13 @@ function RecentlyTrack() {
               <h2 className="card-title">{track.name}</h2>
               <p>
                 Artist: {track.artists.map((artist) => artist.name).join(", ")}
+              </p>
+              <p>
+                Played at:{" "}
+                {new Date(track.played_at).toLocaleString(navigator.language, {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </p>
               <div className="card-actions justify-end">
                 <button className="btn btn-primary">Listen</button>
