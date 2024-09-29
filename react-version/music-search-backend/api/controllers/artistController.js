@@ -9,3 +9,17 @@ exports.getUserTopArtists = async (req, res) => {
         res.status(500).json({message: 'Error fetching top artists', error: error.message})
     }
 }
+
+exports.searchArtists = async (req, res) => {
+    try {
+      const accessToken = req.headers.authorization.split(' ')[1];
+      const query = req.query.q;  // Récupérer le paramètre de recherche
+  
+      const artistsWithStatus = await artistService.searchArtists(accessToken, query);
+      res.json(artistsWithStatus);
+      
+    } catch (error) {
+      console.error('Error in searchArtists controller:', error.message);
+      res.status(500).json({ message: 'Error fetching artists', error: error.message });
+    }
+  };

@@ -7,8 +7,8 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 
 // Fonction pour générer l'URL d'authentification Spotify
 exports.getSpotifyAuthURL = () => {
-  const SCOPE = 'user-top-read user-read-private user-read-recently-played user-read-email';
-  return `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}`;
+  const SCOPE = 'user-top-read user-follow-read user-read-private user-read-recently-played user-read-email';
+  return `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${encodeURIComponent(SCOPE)}`;
 };
 
 
