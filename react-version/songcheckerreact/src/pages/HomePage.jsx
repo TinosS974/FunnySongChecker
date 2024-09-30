@@ -6,6 +6,7 @@ import axios from "axios"; // ou fetch si tu préfères
 import TopArtistsSection from "../components/TopSections/TopArtistsSection";
 import TopSongsSection from "../components/TopSections/TopSongsSection";
 import RecentlyTrack from "../components/TracksSections/RecentlyTrack";
+import SearchByArtist from "../components/SearchByArtist";
 
 function HomePage() {
   const location = useLocation();
@@ -45,11 +46,11 @@ function HomePage() {
   return (
     <>
       <Navbar userInfo={userInfo} />
-      <Separator />
       <div className="flex flex-wrap justify-between gap-6 p-6">
         <TopArtistsSection />
         <TopSongsSection />
         <RecentlyTrack />
+        <SearchByArtist />
       </div>
     </>
   );

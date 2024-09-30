@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* index.css ou App.css */
+body {
+    @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500;
+  }
+  

@@ -46,7 +46,7 @@ function TopArtistsSection() {
           topArtists.map((artist) => (
             <div
               key={artist.id}
-              className="card bg-base-100 shadow-md flex flex-col items-center p-4"
+              className="card glass bg-base-100 shadow-md flex flex-col items-center p-4"
             >
               <div className="avatar">
                 <div className="w-24 rounded-full">
