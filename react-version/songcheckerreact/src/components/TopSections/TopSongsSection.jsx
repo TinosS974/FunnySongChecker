@@ -11,7 +11,7 @@ function TopSongsSection() {
       try {
         const token = localStorage.getItem("spotifyToken");
         const response = await axios.get(
-          "http://localhost:5000/api/spotify/top-tracks",
+          "http://localhost:5000/api/spotify/user-top-tracks",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -38,9 +38,9 @@ function TopSongsSection() {
   if (error) return <p>Error fetching top songs: {error.message}</p>;
 
   return (
-    <div className="w-1/3 p-5">
+    <div className="w-full lg:w-1/3 p-5 bg-base-100 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Top Songs</h2>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {topSongs.length > 0 ? (
           topSongs.map((song) => (
             <div
@@ -50,7 +50,7 @@ function TopSongsSection() {
               <div className="avatar">
                 <div className="w-24 rounded-full">
                   <img
-                    src={song.album.images[0]?.url} // On utilise les images de l'album
+                    src={song.album.images[0]?.url}
                     alt={song.name}
                     className="rounded-full"
                   />
@@ -59,8 +59,7 @@ function TopSongsSection() {
               <p className="text-center mt-4">{song.name}</p>
               <p className="text-sm text-center mt-1">
                 by {song.artists[0]?.name}
-              </p>{" "}
-              {/* Affiche le nom de l'artiste */}
+              </p>
             </div>
           ))
         ) : (

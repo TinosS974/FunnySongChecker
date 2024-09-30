@@ -39,9 +39,9 @@ function TopArtistsSection() {
   if (error) return <p>Error fetching top artists: {error.message}</p>;
 
   return (
-    <div className="w-1/3 p-5">
+    <div className="w-full lg:w-1/3 p-5 bg-base-100 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Top Artists</h2>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {topArtists.length > 0 ? (
           topArtists.map((artist) => (
             <div

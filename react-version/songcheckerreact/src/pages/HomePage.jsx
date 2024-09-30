@@ -18,16 +18,13 @@ function HomePage() {
     const accessToken = params.get("access_token");
 
     if (accessToken) {
-      // Stocker le token dans le localStorage
       localStorage.setItem("spotifyToken", accessToken);
       window.history.replaceState({}, document.title, "/home");
     }
 
-    // Récupérer le token stocké dans le localStorage
     const storedToken = localStorage.getItem("spotifyToken");
 
     if (storedToken) {
-      // Appeler l'API backend pour obtenir les infos de l'utilisateur
       axios
         .get("http://localhost:5000/api/user", {
           headers: {
@@ -41,7 +38,6 @@ function HomePage() {
           console.log("Error fetching user info:", error);
         });
     } else {
-      // Si pas de token, rediriger vers la page de login
       navigate("/");
     }
   }, [location, navigate]);
@@ -50,7 +46,7 @@ function HomePage() {
     <>
       <Navbar userInfo={userInfo} />
       <Separator />
-      <div className="flex">
+      <div className="flex flex-wrap justify-between gap-6 p-6">
         <TopArtistsSection />
         <TopSongsSection />
         <RecentlyTrack />

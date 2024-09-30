@@ -32,12 +32,13 @@ function RecentlyTrack() {
   if (state.error) return <p>Error fetching tracks: {state.error.message}</p>;
 
   return (
-    <div>
+    <div className="w-full lg:w-1/3 p-5 bg-base-100 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Recently Played Tracks</h2>
       {tracks.length > 0 ? (
         tracks.map((track) => (
           <div
             key={track.id}
-            className="card lg:card-side bg-base-100 shadow-xl mb-4"
+            className="card lg:card-side bg-base-100 shadow-md mb-4 flex flex-col lg:flex-row"
           >
             <figure>
               <img
