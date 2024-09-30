@@ -7,6 +7,6 @@ router.get('/user-top-tracks', songController.getUserTopSongs);
 
 router.get('/recently-played', songController.getUserRecentlyPlayed);
 
-router.get('/artist-top-tracks', songController.getArtistTopTracks)
+router.get('/artist-top-tracks/:id', songController.getArtistTopTracks)
 
 module.exports = router;

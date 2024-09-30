@@ -23,7 +23,7 @@ exports.getUserRecentlyPlayed = async(req, res) => {
 exports.getArtistTopTracks = async(req, res) => {
     try {
         const access_token = req.headers.authorization.split(' ')[1];
-        const id = req.query.q;
+        const id = req.params.id;
         const artistTopTracks = await songService.getArtistTopTracks(access_token, id);
         res.json(artistTopTracks);
     } catch (error) {

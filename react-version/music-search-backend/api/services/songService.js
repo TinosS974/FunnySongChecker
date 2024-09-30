@@ -41,15 +41,18 @@ exports.getTracksRecentlyPlayed = async(accessToken, query) => {
     
 }
 
-exports.getArtistTopTracks = async(accessToken, id) => {
+exports.getArtistTopTracks = async (accessToken, id) => {
     try {
         const response = await axios.get(`https://api.spotify.com/v1/artists/${id}/top-tracks`, {
-            headers : {
+            headers: {
                 Authorization: `Bearer ${accessToken}`,
-            }
+            },
+            params: {
+                market: 'from_token', // Utilise le marché associé au token utilisateur
+            },
         });
-        return response.data;
-    } catch (error) { 
+        return response.data.tracks; // Extraire le tableau des pistes
+    } catch (error) {
         if (error.response) {
             console.error('Spotify API response error:', error.response.status, error.response.data);
         } else if (error.request) {
@@ -57,6 +60,7 @@ exports.getArtistTopTracks = async(accessToken, id) => {
         } else {
             console.error('Error during Spotify API request setup:', error.message);
         }
-        throw new Error('Error fetching artists top tracks: ' + error.message);
+        throw new Error('Error fetching artist top tracks: ' + error.message);
     }
-}
+};
+

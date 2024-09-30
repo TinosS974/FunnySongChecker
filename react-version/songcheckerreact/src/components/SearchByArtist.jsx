@@ -66,7 +66,7 @@ function SearchByArtist() {
               value={query}
             />
             {suggestions.length > 0 && (
-              <ul className="menu bg-base-100 rounded-box shadow mt-2 max-h-48 overflow-y-scroll">
+              <ul className="menu bg-base-100 rounded-box shadow mt-2 max-h-48 overflow-y-scroll flex flex-col">
                 {suggestions.map((artist) => (
                   <li
                     key={artist.id}

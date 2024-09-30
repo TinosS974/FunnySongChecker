@@ -10,21 +10,23 @@ function ArtistTopTracks({ artistId }) {
       try {
         const token = localStorage.getItem("spotifyToken");
         const response = await axios.get(
-          `http://localhost:5000/api/spotify/artist-top-tracks?q=${artistId}`,
+          `http://localhost:5000/api/spotify/artist-top-tracks/${artistId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
 
-        setTopTracks(response.data);
+        setTopTracks(response.data); // Assurez-vous que la réponse contient un tableau de pistes
       } catch (error) {
         console.error("Error fetching top tracks:", error);
         setError(error);
       }
     };
 
-    fetchTopTracks();
-  }, [artistId]); // Dépend de l'ID de l'artiste
+    if (artistId) {
+      fetchTopTracks();
+    }
+  }, [artistId]);
 
   if (error) return <p>Error fetching top tracks: {error.message}</p>;
 
