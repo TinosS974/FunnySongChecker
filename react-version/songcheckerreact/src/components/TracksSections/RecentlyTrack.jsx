@@ -32,14 +32,14 @@ function RecentlyTrack() {
 
   return (
     <div className="w-1/4 lg:w-1/3 p-5 bg-base-content rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-neutral-content ">
+      <h2 className="text-2xl font-bold mb-4 text-neutral-content text-center">
         Recently Played Tracks
       </h2>
       {tracks.length > 0 ? (
         tracks.map((track) => (
           <div
             key={track.id}
-            className="card w-2/3 lg:card-side bg-base-100 shadow-md mb-4 flex flex-col lg:flex-row"
+            className="card w-2/3 bg-base-100 shadow-md mb-4 flex flex-col lg:flex-row"
           >
             <figure>
               <img

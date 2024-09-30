@@ -38,14 +38,14 @@ function TopSongsSection() {
   if (error) return <p>Error fetching top songs: {error.message}</p>;
 
   return (
-    <div className="w-full lg:w-1/3 p-5 bg-base-100 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Top Songs</h2>
+    <div className="w-full lg:w-1/3 p-5 bg-green-600 rounded-lg">
+      <h2 className="text-2xl font-bold mb-4 text-center">Top Songs</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {topSongs.length > 0 ? (
           topSongs.map((song) => (
             <div
               key={song.id}
-              className="card bg-base-100 shadow-md flex flex-col items-center p-4"
+              className="card glass bg-success-content shadow-md flex flex-col items-center p-4"
             >
               <div className="avatar">
                 <div className="w-24 rounded-full">
@@ -56,8 +56,8 @@ function TopSongsSection() {
                   />
                 </div>
               </div>
-              <p className="text-center mt-4">{song.name}</p>
-              <p className="text-sm text-center mt-1">
+              <p className="text-center mt-4 text-white">{song.name}</p>
+              <p className="text-sm text-center mt-1 text-white">
                 by {song.artists[0]?.name}
               </p>
             </div>
