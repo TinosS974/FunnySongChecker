@@ -9,14 +9,12 @@ const checkToken = async (navigate) => {
   }
 
   try {
-    // Faire une requête test à l'API Spotify pour vérifier le token
     await axios.get("https://api.spotify.com/v1/me", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return true; // Le token est valide
+    return true;
   } catch (error) {
     if (error.response && error.response.status === 401) {
-      // Token expiré, vider le localStorage et rediriger vers la page de login
       localStorage.setItem("spotifyToken", "");
       navigate("/");
     }

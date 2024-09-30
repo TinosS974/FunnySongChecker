@@ -48,10 +48,10 @@ exports.getArtistTopTracks = async (accessToken, id) => {
                 Authorization: `Bearer ${accessToken}`,
             },
             params: {
-                market: 'from_token', // Utilise le marché associé au token utilisateur
+                market: 'from_token',
             },
         });
-        return response.data.tracks; // Extraire le tableau des pistes
+        return response.data.tracks;
     } catch (error) {
         if (error.response) {
             console.error('Spotify API response error:', error.response.status, error.response.data);

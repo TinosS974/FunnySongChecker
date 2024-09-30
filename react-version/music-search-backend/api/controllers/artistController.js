@@ -13,7 +13,7 @@ exports.getUserTopArtists = async (req, res) => {
 exports.searchArtists = async (req, res) => {
     try {
       const accessToken = req.headers.authorization.split(' ')[1];
-      const query = req.query.q;  // Récupérer le paramètre de recherche
+      const query = req.query.q;
   
       const artistsWithStatus = await artistService.searchArtists(accessToken, query);
       res.json(artistsWithStatus);

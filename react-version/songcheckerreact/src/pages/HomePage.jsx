@@ -1,8 +1,7 @@
 import Navbar from "../components/Navbar";
-import Separator from "../components/Separator";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios"; // ou fetch si tu préfères
+import axios from "axios";
 import TopArtistsSection from "../components/TopSections/TopArtistsSection";
 import TopSongsSection from "../components/TopSections/TopSongsSection";
 import RecentlyTrack from "../components/TracksSections/RecentlyTrack";
@@ -14,7 +13,6 @@ function HomePage() {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    // Récupérer le token depuis l'URL
     const params = new URLSearchParams(location.search);
     const accessToken = params.get("access_token");
 

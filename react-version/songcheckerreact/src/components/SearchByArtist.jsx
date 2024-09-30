@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import ArtistTopTracks from "./ArtistTopTracks"; // Importer le composant enfant pour les top tracks
+import ArtistTopTracks from "./ArtistTopTracks";
 
 function SearchByArtist() {
   const inputPlaceholder = "Type an artist name";
@@ -11,9 +11,7 @@ function SearchByArtist() {
   const [selectedArtistId, setSelectedArtistId] = useState(null);
   const [cardImg, setCardImg] = useState(
     "https://martech.org/wp-content/uploads/2017/09/spotify-logo-1920x1080.jpg"
-  ); // Image par défaut
-
-  // Gérer l'input utilisateur et effectuer une recherche dynamique
+  );
   const handleQuery = async (event) => {
     const value = event.target.value;
     setQuery(value);
@@ -24,7 +22,6 @@ function SearchByArtist() {
     }
 
     try {
-      // Appeler l'API de ton backend pour chercher les artistes
       const token = localStorage.getItem("spotifyToken");
       const response = await axios.get(
         `http://localhost:5000/api/spotify/search-artists?q=${encodeURIComponent(
@@ -35,7 +32,6 @@ function SearchByArtist() {
         }
       );
 
-      // Mettre à jour les suggestions avec les artistes
       setSuggestions(response.data);
     } catch (error) {
       console.error("Error fetching artists:", error);
@@ -43,23 +39,22 @@ function SearchByArtist() {
     }
   };
 
-  // Gérer la sélection de l'artiste
   const handleArtistSelect = (artist) => {
-    setSelectedArtistId(artist.id); // Définir l'ID de l'artiste sélectionné
+    setSelectedArtistId(artist.id);
     setCardImg(
       artist.images[0]?.url ||
         "https://martech.org/wp-content/uploads/2017/09/spotify-logo-1920x1080.jpg"
-    ); // Mettre à jour l'image de la carte
+    );
   };
 
   return (
     <div className="card rounded-box grid h-auto w-1/3 flex-grow place-items-center">
       <div className="card glass w-96">
-        <figure className="h-56 w-full">
+        <figure className="h-56 w-full overflow-hidden">
           <img
             src={cardImg}
             alt="Artist banner"
-            className="object-contain h-full w-full"
+            className="object-cover h-full w-full"
           />
         </figure>
         <div className="card-body">
@@ -107,7 +102,6 @@ function SearchByArtist() {
               )}
             </label>
           </div>
-          {/* Affichage des top tracks de l'artiste sélectionné */}
           {selectedArtistId && <ArtistTopTracks artistId={selectedArtistId} />}
         </div>
       </div>

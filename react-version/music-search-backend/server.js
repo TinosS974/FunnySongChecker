@@ -8,19 +8,16 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Importer les routes de l'artiste depuis le dossier api
 const artistRoutes = require('./api/routes/artistRoute');
 const authRoutes = require('./api/routes/authRoute');
 const userRoutes = require('./api/routes/userRoute');
 const songRoutes = require('./api/routes/songRoute')
 
-// Utiliser les routes de l'artiste pour l'API
 app.use('/api/spotify', artistRoutes);
 app.use('/api', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/spotify', songRoutes);
 
-// Lancer le serveur
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

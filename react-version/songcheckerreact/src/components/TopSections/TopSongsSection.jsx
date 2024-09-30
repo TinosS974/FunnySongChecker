@@ -17,12 +17,12 @@ function TopSongsSection() {
           }
         );
 
-        console.log("Top songs response:", response.data); // Log pour vérifier la réponse
+        console.log("Top songs response:", response.data);
 
         if (response.data) {
-          setTopSongs(response.data); // Assigne directement les données reçues
+          setTopSongs(response.data);
         } else {
-          setTopSongs([]); // Si pas de données, on met un tableau vide
+          setTopSongs([]);
         }
       } catch (error) {
         setError(error);

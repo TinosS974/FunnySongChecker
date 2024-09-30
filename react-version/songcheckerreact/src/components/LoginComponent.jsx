@@ -8,7 +8,6 @@ function LoginComponent() {
   const descTxt = `Connectez vous à votre compte spotify afin de commencer l'expérience`;
 
   useEffect(() => {
-    // Vérifier si l'utilisateur est déjà connecté
     const verifyToken = async () => {
       const isValid = await checkToken(navigate);
       if (isValid) {

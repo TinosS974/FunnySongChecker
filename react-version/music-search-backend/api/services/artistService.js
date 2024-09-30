@@ -8,7 +8,7 @@ exports.getTopArtists = async (accessToken) => {
       },
     });
 
-    console.log('Spotify API response:', response.data);  // Log de la réponse complète
+    console.log('Spotify API response:', response.data);
     return response.data.items;
 
   } catch (error) {
@@ -25,7 +25,6 @@ exports.getTopArtists = async (accessToken) => {
 
 exports.searchArtists = async (accessToken, query) => {
     try {
-        // Step 1: Search for artists using Spotify's search API
         const searchResponse = await axios.get(`https://api.spotify.com/v1/search`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -33,14 +32,13 @@ exports.searchArtists = async (accessToken, query) => {
             params: {
                 q: query,
                 type: 'artist',
-                limit: 10, // Limit the number of results
+                limit: 10,
             },
         });
 
         const artists = searchResponse.data.artists.items;
         const artistIds = artists.map((artist) => artist.id).join(',');
 
-        // Step 2: Check if the user follows the artists
         const followResponse = await axios.get(`https://api.spotify.com/v1/me/following/contains`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -51,7 +49,6 @@ exports.searchArtists = async (accessToken, query) => {
             },
         });
 
-        // Combine artist data with follow status
         return artists.map((artist, index) => ({
             ...artist,
             isFollowed: followResponse.data[index],

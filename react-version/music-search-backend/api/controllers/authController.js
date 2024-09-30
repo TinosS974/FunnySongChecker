@@ -1,6 +1,5 @@
 const authService = require('../services/authService');
 
-// Contrôleur pour rediriger vers Spotify
 exports.redirectToSpotifyLogin = (req, res) => {
   const spotifyAuthURL = authService.getSpotifyAuthURL();
   res.redirect(spotifyAuthURL);

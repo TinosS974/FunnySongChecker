@@ -2,7 +2,7 @@ function Navbar({ userInfo }) {
   const appTitle = "Song Checker";
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-200">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">{appTitle}</a>
         <h2 className="mx-10 text-xl">

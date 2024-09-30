@@ -17,13 +17,11 @@ function TopArtistsSection() {
           }
         );
 
-        console.log("Top artists response:", response.data); // Log ici pour voir les données reçues
-
-        // Modifie la façon de récupérer les artistes
+        console.log("Top artists response:", response.data);
         if (response.data) {
-          setTopArtists(response.data); // Récupère directement response.data
+          setTopArtists(response.data);
         } else {
-          setTopArtists([]); // Si pas de données, un tableau vide
+          setTopArtists([]);
         }
       } catch (error) {
         setError(error);

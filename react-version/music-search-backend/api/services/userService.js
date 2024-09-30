@@ -5,10 +5,10 @@ exports.getUserInfos = async (accessToken) => {
   try {
     const response = await axios.get('https://api.spotify.com/v1/me', {
       headers: {
-        Authorization: `Bearer ${accessToken}`,  // Ajout du token d'accès dans le header
+        Authorization: `Bearer ${accessToken}`,
       },
     });
-    return response.data;  // Retourne les données du profil utilisateur
+    return response.data;
   } catch (error) {
     throw new Error('Error fetching user info from Spotify: ' + error.message);
   }

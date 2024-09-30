@@ -16,7 +16,7 @@ function ArtistTopTracks({ artistId }) {
           }
         );
 
-        setTopTracks(response.data); // Assurez-vous que la réponse contient un tableau de pistes
+        setTopTracks(response.data);
       } catch (error) {
         console.error("Error fetching top tracks:", error);
         setError(error);

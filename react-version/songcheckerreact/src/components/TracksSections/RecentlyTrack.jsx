@@ -17,7 +17,6 @@ function RecentlyTrack() {
     console.log("Recently played tracks response:", response.data);
 
     if (response.data) {
-      // Map over the items and extract both 'track' and 'played_at'
       const fetchedTracks = response.data.map((item) => ({
         ...item.track,
         played_at: item.played_at,
@@ -32,13 +31,15 @@ function RecentlyTrack() {
   if (state.error) return <p>Error fetching tracks: {state.error.message}</p>;
 
   return (
-    <div className="w-full lg:w-1/3 p-5 bg-base-100 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Recently Played Tracks</h2>
+    <div className="w-1/4 lg:w-1/3 p-5 bg-base-content rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-neutral-content ">
+        Recently Played Tracks
+      </h2>
       {tracks.length > 0 ? (
         tracks.map((track) => (
           <div
             key={track.id}
-            className="card lg:card-side bg-base-100 shadow-md mb-4 flex flex-col lg:flex-row"
+            className="card w-2/3 lg:card-side bg-base-100 shadow-md mb-4 flex flex-col lg:flex-row"
           >
             <figure>
               <img
