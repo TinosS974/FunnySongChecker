@@ -45,17 +45,17 @@ function HomePage() {
     <>
       <Navbar userInfo={userInfo} />
       <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6 gap-y-10 w-full max-w-6xl">
-          <div className="col-span-3 lg:col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10 w-full max-w-7xl">
+          <div className="col-span-1">
             <TopArtistsSection />
           </div>
-          <div className="col-span-3 lg:col-span-2">
+          <div className="col-span-1">
             <TopSongsSection />
           </div>
-          <div className="col-span-3">
+          <div className="col-span-2">
             <RecentlyTrack />
           </div>
-          <div className="col-span-3">
+          <div className="col-span-2">
             <SearchByArtist />
           </div>
         </div>

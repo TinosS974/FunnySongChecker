@@ -34,20 +34,19 @@ function TopArtistsSection() {
 
   if (loading) return <p>Loading top artists...</p>;
   if (error) return <p>Error fetching top artists: {error.message}</p>;
-
   return (
-    <div className="w-full p-5 bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center text-cyan-400">
+    <div className="w-full lg:w-5/6 p-5 bg-gray-800 rounded-lg shadow-md mx-auto">
+      <h2 className="text-3xl font-bold mb-4 text-center neon-text">
         Top Artists
       </h2>
-      <div className="grid grid-cols-4 gap-x-8 gap-y-8">
+      <div className="grid grid-cols-4 gap-10">
         {topArtists.length > 0 ? (
           topArtists.map((artist) => (
             <div
               key={artist.id}
-              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4 w-44"
+              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4"
             >
-              <div className="avatar">
+              <div className="avatar mb-4">
                 <div className="w-32 h-32 rounded-full overflow-hidden">
                   <img
                     src={artist.images[0]?.url}
