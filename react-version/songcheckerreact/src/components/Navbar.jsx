@@ -2,10 +2,10 @@ function Navbar({ userInfo }) {
   const appTitle = "Song Checker";
 
   return (
-    <div className="navbar bg-base-200">
+    <div className="navbar fixed top-0 left-0 w-full bg-cyan-700 rounded-b-lg shadow-lg p-4 z-50">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">{appTitle}</a>
-        <h2 className="mx-10 text-xl">
+        <a className="btn btn-ghost text-xl text-white">{appTitle}</a>
+        <h2 className="mx-10 text-xl text-white">
           {userInfo ? `Bonjour, ${userInfo.display_name}` : "Utilisateur"}
         </h2>
       </div>
