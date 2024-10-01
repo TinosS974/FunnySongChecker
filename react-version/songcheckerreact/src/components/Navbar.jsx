@@ -10,9 +10,9 @@ function Navbar({ userInfo }) {
   };
 
   return (
-    <div className="navbar fixed top-0 left-0 w-full bg-cyan-700 rounded-b-lg shadow-lg p-4 z-50">
+    <div className="navbar fixed top-0 left-0 w-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-b-lg shadow-lg p-4 z-50">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl text-white">{appTitle}</a>
+        <a className="btn btn-ghost text-xl text-cyan-400">{appTitle}</a>
         <h2 className="mx-10 text-xl text-white">
           {userInfo ? `Bonjour, ${userInfo.display_name}` : "Utilisateur"}
         </h2>
@@ -22,7 +22,7 @@ function Navbar({ userInfo }) {
           <input
             type="text"
             placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
+            className="input input-bordered w-24 md:w-auto bg-gray-700 text-white placeholder-gray-400"
           />
         </div>
         <div className="dropdown dropdown-end">
@@ -44,10 +44,15 @@ function Navbar({ userInfo }) {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a onClick={handleLogout}>Logout</a>
+              <a
+                onClick={handleLogout}
+                className="text-white hover:bg-cyan-600"
+              >
+                Logout
+              </a>
             </li>
           </ul>
         </div>

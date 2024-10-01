@@ -44,11 +44,13 @@ function HomePage() {
   return (
     <>
       <Navbar userInfo={userInfo} />
-      <div className="flex flex-wrap justify-between gap-6 p-6">
-        <TopArtistsSection />
-        <TopSongsSection />
-        <RecentlyTrack />
-        <SearchByArtist />
+      <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-6xl">
+          <TopArtistsSection />
+          <TopSongsSection />
+          <RecentlyTrack />
+          <SearchByArtist />
+        </div>
       </div>
     </>
   );

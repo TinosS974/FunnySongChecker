@@ -2,9 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply bg-gradient-to-r from-gray-500 to-black;
-    padding-top: 8rem;
-}
 
   

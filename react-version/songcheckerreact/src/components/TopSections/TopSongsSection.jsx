@@ -17,10 +17,8 @@ function TopSongsSection() {
           }
         );
 
-        console.log("Top songs response:", response.data);
-
         if (response.data) {
-          setTopSongs(response.data);
+          setTopSongs(response.data.slice(0, 12)); // Limiter à 12 chansons
         } else {
           setTopSongs([]);
         }
@@ -38,32 +36,34 @@ function TopSongsSection() {
   if (error) return <p>Error fetching top songs: {error.message}</p>;
 
   return (
-    <div className="w-full lg:w-1/3 p-5 bg-green-600 rounded-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">Top Songs</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+    <div className="w-full p-5 bg-gray-800 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-center text-cyan-400">
+        Top Songs
+      </h2>
+      <div className="grid grid-cols-4 gap-x-8 gap-y-8">
         {topSongs.length > 0 ? (
           topSongs.map((song) => (
             <div
               key={song.id}
-              className="card glass bg-success-content shadow-md flex flex-col items-center p-4"
+              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4 w-44"
             >
-              <div className="avatar">
-                <div className="w-24 rounded-full">
+              <div className="avatar mb-4">
+                <div className="w-32 h-32 rounded-full overflow-hidden">
                   <img
                     src={song.album.images[0]?.url}
                     alt={song.name}
-                    className="rounded-full"
+                    className="object-cover w-full h-full"
                   />
                 </div>
               </div>
-              <p className="text-center mt-4 text-white">{song.name}</p>
-              <p className="text-sm text-center mt-1 text-white">
+              <p className="text-center mt-2 text-white">{song.name}</p>
+              <p className="text-sm text-center mt-1 text-gray-400">
                 by {song.artists[0]?.name}
               </p>
             </div>
           ))
         ) : (
-          <p>No songs found.</p>
+          <p className="text-white">No songs found.</p>
         )}
       </div>
     </div>

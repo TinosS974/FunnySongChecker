@@ -17,9 +17,8 @@ function TopArtistsSection() {
           }
         );
 
-        console.log("Top artists response:", response.data);
         if (response.data) {
-          setTopArtists(response.data);
+          setTopArtists(response.data.slice(0, 12)); // Limiter à 12 artistes
         } else {
           setTopArtists([]);
         }
@@ -37,33 +36,31 @@ function TopArtistsSection() {
   if (error) return <p>Error fetching top artists: {error.message}</p>;
 
   return (
-    <div className="w-full lg:w-1/3 p-5 bg-green-500 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center text-black">
+    <div className="w-full p-5 bg-gray-800 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-center text-cyan-400">
         Top Artists
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-4 gap-x-8 gap-y-8">
         {topArtists.length > 0 ? (
           topArtists.map((artist) => (
             <div
               key={artist.id}
-              className="card glass bg-black shadow-md flex flex-col items-center p-4 shadow-success-content"
+              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4 w-44"
             >
               <div className="avatar">
-                <div className="w-24 rounded-full">
+                <div className="w-32 h-32 rounded-full overflow-hidden">
                   <img
                     src={artist.images[0]?.url}
                     alt={artist.name}
-                    className="rounded-full"
+                    className="object-cover w-full h-full"
                   />
                 </div>
               </div>
-              <p className="text-center mt-4 text-neutral-content">
-                {artist.name}
-              </p>
+              <p className="text-center mt-2 text-white">{artist.name}</p>
             </div>
           ))
         ) : (
-          <p>No artists found.</p>
+          <p className="text-white">No artists found.</p>
         )}
       </div>
     </div>
