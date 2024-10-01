@@ -1,5 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 function Navbar({ userInfo }) {
   const appTitle = "Song Checker";
+  const navigate = useNavigate(); // Obtenez la fonction navigate
+
+  const handleLogout = () => {
+    localStorage.setItem("spotifyToken", ""); // Supprime le token
+    navigate("/"); // Redirige directement vers la page de login
+  };
 
   return (
     <div className="navbar fixed top-0 left-0 w-full bg-cyan-700 rounded-b-lg shadow-lg p-4 z-50">
@@ -39,7 +47,7 @@ function Navbar({ userInfo }) {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Logout</a>
+              <a onClick={handleLogout}>Logout</a>
             </li>
           </ul>
         </div>
