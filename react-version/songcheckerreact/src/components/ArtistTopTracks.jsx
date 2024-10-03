@@ -32,20 +32,20 @@ function ArtistTopTracks({ artistId }) {
 
   return (
     <div className="mt-4">
-      <h2 className="text-lg font-bold">Top Tracks</h2>
+      <h2 className="text-lg font-bold mb-4">Top Tracks</h2>
       {topTracks.length > 0 ? (
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {topTracks.map((track) => (
-            <div key={track.id} className="card bg-base-100 shadow-md p-4">
-              <div className="flex items-center">
+            <div key={track.id} className="card bg-gray-900 shadow-md p-4">
+              <div className="flex items-center mb-4">
                 <img
                   src={track.album.images[0]?.url}
                   alt={track.name}
                   className="w-16 h-16 rounded-full mr-4"
                 />
                 <div>
-                  <p className="font-bold">{track.name}</p>
-                  <p className="text-sm text-gray-500">{track.album.name}</p>
+                  <p className="font-bold text-white">{track.name}</p>
+                  <p className="text-sm text-gray-400">{track.album.name}</p>
                 </div>
               </div>
             </div>

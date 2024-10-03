@@ -55,7 +55,6 @@ function HomePage() {
           <div className="col-span-2">
             <RecentlyTrack />
           </div>
-          <SearchByArtist />
         </div>
       </div>
     </>

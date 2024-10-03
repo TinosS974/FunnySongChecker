@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import SearchByArtistModal from "./searchSection/SearchByArtistModal";
 
 function Navbar({ userInfo }) {
   const appTitle = "Spotify Checker";
-  const navigate = useNavigate(); // Obtenez la fonction navigate
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false); // État pour gérer l'ouverture de la modal
 
   const handleLogout = () => {
-    localStorage.setItem("spotifyToken", ""); // Supprime le token
-    navigate("/"); // Redirige directement vers la page de login
+    localStorage.setItem("spotifyToken", "");
+    navigate("/");
   };
 
   return (
@@ -18,13 +21,12 @@ function Navbar({ userInfo }) {
         </h2>
       </div>
       <div className="flex-none gap-2">
-        <div className="form-control">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto bg-gray-700 text-white placeholder-gray-400"
-          />
-        </div>
+        <button
+          className="btn btn-outline text-white"
+          onClick={() => setIsModalOpen(true)} // Ouvrir la modal
+        >
+          Search Artist
+        </button>
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -57,6 +59,11 @@ function Navbar({ userInfo }) {
           </ul>
         </div>
       </div>
+
+      {/* Modal pour la recherche d'artiste */}
+      {isModalOpen && (
+        <SearchByArtistModal closeModal={() => setIsModalOpen(false)} /> // Fermer la modal
+      )}
     </div>
   );
 }
