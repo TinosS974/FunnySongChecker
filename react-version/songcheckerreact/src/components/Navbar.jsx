@@ -13,7 +13,7 @@ function Navbar({ userInfo }) {
     <div className="navbar fixed top-0 left-0 w-full bg-gradient-to-r from-gray-800 to-gray-900 shadow-lg p-4 z-50">
       <div className="flex-1">
         <h2 className="btn btn-ghost text-xl neon-text">{appTitle}</h2>
-        <h2 className="mx-10 text-3xl text-white">
+        <h2 className="mx-10 text-4xl text-white">
           {userInfo ? `Bonjour, ${userInfo.display_name}` : "Utilisateur"}
         </h2>
       </div>

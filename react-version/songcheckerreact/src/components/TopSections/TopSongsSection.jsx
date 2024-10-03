@@ -34,17 +34,18 @@ function TopSongsSection() {
 
   if (loading) return <p>Loading top songs...</p>;
   if (error) return <p>Error fetching top songs: {error.message}</p>;
+
   return (
-    <div className="w-full p-8 bg-gray-800 rounded-lg mt-4 mb-12 shadow-custom shadow-black">
-      <h2 className="text-2xl font-bold mb-8 text-center neon-text">
-        I Guess you like this songs
-      </h2>
-      <div className="grid grid-cols-4 gap-x-10 gap-y-10">
+    <div className="p-8 mt-4 bg-gradient-to-b from-gray-800 to-green-800 rounded-lg mx-auto">
+      <h1 className="text-5xl font-bold mb-8 text-center text-white">
+        Your Top Tracks
+      </h1>
+      <div className="grid grid-cols-4 gap-10">
         {topSongs.length > 0 ? (
           topSongs.map((song) => (
             <div
               key={song.id}
-              className="bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4 w-52"
+              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4"
             >
               <div className="avatar mb-4">
                 <div className="w-32 h-32 rounded-full overflow-hidden">
@@ -55,8 +56,10 @@ function TopSongsSection() {
                   />
                 </div>
               </div>
-              <p className="text-center mt-2 text-white">{song.name}</p>
-              <p className="text-sm text-center mt-1 text-gray-400">
+              <p className="text-center mt-2 text-white font-bold">
+                {song.name}
+              </p>
+              <p className="text-sm text-center font-bold mt-1 text-gray-400">
                 by {song.artists[0]?.name}
               </p>
             </div>

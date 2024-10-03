@@ -29,16 +29,16 @@ function RecentlyTrack() {
   if (state.error) return <p>Error fetching tracks: {state.error.message}</p>;
 
   return (
-    <div className="w-full lg:w-2/3 mx-auto p-5 bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center neon-text">
+    <div className="w-full lg:w-2/3 mx-auto p-5 bg-gradient-to-b from-gray-800 to-green-800  rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold mb-4 text-center text-white">
         Recently Played Tracks
-      </h2>
+      </h1>
       <div className="carousel space-x-4 p-4 rounded-box flex justify-center overflow-x-auto snap-x snap-mandatory">
         <div className="flex space-x-4">
           {tracks.length > 0 ? (
             tracks.map((track, index) => (
               <div
-                key={track.id}
+                key={`${track.id}-${track.played_at}`} // Clé unique utilisant l'ID et la date d'écoute
                 id={`item${index}`}
                 className="carousel-item snap-center flex-shrink-0 w-60"
               >

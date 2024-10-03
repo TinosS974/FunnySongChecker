@@ -34,9 +34,10 @@ function TopArtistsSection() {
 
   if (loading) return <p>Loading top artists...</p>;
   if (error) return <p>Error fetching top artists: {error.message}</p>;
+
   return (
-    <div className="p-8 mt-4 bg-gray-800 rounded-lg shadow-custom shadow-black mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-center neon-text">
+    <div className="p-8 mt-4 bg-gradient-to-b from-gray-800 to-green-800 rounded-lg mx-auto">
+      <h2 className="text-5xl font-bold mb-8 text-center text-white">
         Your Top Artists
       </h2>
       <div className="grid grid-cols-4 gap-10">
@@ -55,7 +56,9 @@ function TopArtistsSection() {
                   />
                 </div>
               </div>
-              <p className="text-center mt-2 text-white">{artist.name}</p>
+              <p className="text-center mt-2 text-white font-bold">
+                {artist.name}
+              </p>
             </div>
           ))
         ) : (
