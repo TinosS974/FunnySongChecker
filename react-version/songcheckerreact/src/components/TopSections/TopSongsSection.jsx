@@ -35,19 +35,19 @@ function TopSongsSection() {
   if (loading) return <p>Loading top songs...</p>;
   if (error) return <p>Error fetching top songs: {error.message}</p>;
   return (
-    <div className="w-full lg:w-3/4 p-5 bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center neon-text">
-        Top Songs
+    <div className="w-full p-8 bg-gray-800 rounded-lg mt-4 mb-12 border-solid border-2 border-black shadow-lg shadow-black">
+      <h2 className="text-2xl font-bold mb-8 text-center neon-text">
+        I Guess you like this songs
       </h2>
       <div className="grid grid-cols-4 gap-x-10 gap-y-10">
         {topSongs.length > 0 ? (
           topSongs.map((song) => (
             <div
               key={song.id}
-              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4 w-52"
+              className="bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4 w-52"
             >
               <div className="avatar mb-4">
-                <div className="w-40 h-40 rounded-full overflow-hidden">
+                <div className="w-32 h-32 rounded-full overflow-hidden">
                   <img
                     src={song.album.images[0]?.url}
                     alt={song.name}

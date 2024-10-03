@@ -58,7 +58,7 @@ function SearchByArtist() {
           />
         </figure>
         <div className="card-body">
-          <h1 className="card-title">{cardTitle}</h1>
+          <h1 className="card-title text-neutral-50">{cardTitle}</h1>
           <div className="card-actions justify-end">
             <label className="form-control w-full max-w-xs">
               <input

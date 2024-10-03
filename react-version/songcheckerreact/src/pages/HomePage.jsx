@@ -45,7 +45,7 @@ function HomePage() {
     <>
       <Navbar userInfo={userInfo} />
       <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10 w-full max-w-7xl">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10">
           <div className="col-span-1">
             <TopArtistsSection />
           </div>
