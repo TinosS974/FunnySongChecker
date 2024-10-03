@@ -18,7 +18,7 @@ function TopSongsSection() {
         );
 
         if (response.data) {
-          setTopSongs(response.data.slice(0, 12)); // Limiter à 12 chansons
+          setTopSongs(response.data.slice(0, 12));
         } else {
           setTopSongs([]);
         }
@@ -42,11 +42,14 @@ function TopSongsSection() {
       </h1>
       <div className="grid grid-cols-4 gap-10">
         {topSongs.length > 0 ? (
-          topSongs.map((song) => (
+          topSongs.map((song, index) => (
             <div
               key={song.id}
               className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4"
             >
+              <div className="absolute top-2 left-2 text-white rounded-full px-3 py-1 text-md font-bold">
+                #{index + 1}
+              </div>
               <div className="avatar mb-4">
                 <div className="w-32 h-32 rounded-full overflow-hidden">
                   <img

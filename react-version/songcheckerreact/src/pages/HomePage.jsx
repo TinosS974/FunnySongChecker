@@ -5,7 +5,6 @@ import axios from "axios";
 import TopArtistsSection from "../components/TopSections/TopArtistsSection";
 import TopSongsSection from "../components/TopSections/TopSongsSection";
 import RecentlyTrack from "../components/TracksSections/RecentlyTrack";
-import SearchByArtist from "../components/SearchByArtist";
 
 function HomePage() {
   const location = useLocation();

@@ -18,7 +18,7 @@ function TopArtistsSection() {
         );
 
         if (response.data) {
-          setTopArtists(response.data.slice(0, 12)); // Limiter à 12 artistes
+          setTopArtists(response.data.slice(0, 12));
         } else {
           setTopArtists([]);
         }
@@ -42,11 +42,14 @@ function TopArtistsSection() {
       </h2>
       <div className="grid grid-cols-4 gap-10">
         {topArtists.length > 0 ? (
-          topArtists.map((artist) => (
+          topArtists.map((artist, index) => (
             <div
               key={artist.id}
-              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4"
+              className="card bg-gray-900 hover:bg-gray-700 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4 relative"
             >
+              <div className="absolute top-2 left-2 text-white rounded-full px-3 py-1 text-md font-bold">
+                #{index + 1}
+              </div>
               <div className="avatar mb-4">
                 <div className="w-32 h-32 rounded-full overflow-hidden">
                   <img
