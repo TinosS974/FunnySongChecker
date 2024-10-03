@@ -18,7 +18,7 @@ exports.getTopSongs = async(accessToken) => {
 
 exports.getTracksRecentlyPlayed = async(accessToken, query) => {
     try {
-        const response = await axios.get("https://api.spotify.com/v1/me/player/recently-played?limit=10", {
+        const response = await axios.get("https://api.spotify.com/v1/me/player/recently-played?limit=20", {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },

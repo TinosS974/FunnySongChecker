@@ -33,34 +33,31 @@ function RecentlyTrack() {
       <h2 className="text-2xl font-bold mb-4 text-center neon-text">
         Recently Played Tracks
       </h2>
-      <div className="carousel space-x-4 p-4 rounded-box flex justify-center overflow-x-auto">
+      <div className="carousel space-x-4 p-4 rounded-box flex justify-center overflow-x-auto snap-x snap-mandatory">
         <div className="flex space-x-4">
           {tracks.length > 0 ? (
             tracks.map((track, index) => (
               <div
                 key={track.id}
                 id={`item${index}`}
-                className="carousel-item w-auto flex justify-center"
+                className="carousel-item snap-center flex-shrink-0 w-60"
               >
-                <div className="card w-60 bg-gray-900 shadow-lg hover:scale-105 transition-transform duration-300 mx-2">
+                <div className="card bg-gray-900 shadow-lg hover:scale-105 transition-transform duration-300 mx-2">
                   <figure>
                     <img
                       src={
                         track.album?.images[0]?.url || "placeholder_image_url"
                       }
                       alt={track.name}
-                      className="w-full h-32 object-cover"
+                      className="w-full object-cover"
                     />
                   </figure>
                   <div className="card-body p-4">
-                    <h2 className="card-title text-sm text-white">
-                      {track.name}
-                    </h2>
-                    <p className="text-xs text-gray-400">
-                      Artist:{" "}
+                    <h2 className="card-title text-white">{track.name}</h2>
+                    <p className="text-lg text-gray-400">
                       {track.artists.map((artist) => artist.name).join(", ")}
                     </p>
-                    <p className="text-xs text-gray-400">
+                    <strong className="text-xs text-gray-400">
                       Played at:{" "}
                       {new Date(track.played_at).toLocaleString(
                         navigator.language,
@@ -69,7 +66,7 @@ function RecentlyTrack() {
                           minute: "2-digit",
                         }
                       )}
-                    </p>
+                    </strong>
                     <div className="card-actions justify-end">
                       <button className="btn btn-cyan-600 btn-sm">
                         Listen
@@ -83,18 +80,6 @@ function RecentlyTrack() {
             <p className="text-white">No recently played tracks found.</p>
           )}
         </div>
-      </div>
-      <div className="flex justify-center w-full py-2 gap-2">
-        {tracks.length > 0 &&
-          tracks.map((_, index) => (
-            <a
-              key={index}
-              href={`#item${index}`}
-              className="btn btn-xs btn-circle"
-            >
-              {index + 1}
-            </a>
-          ))}
       </div>
     </div>
   );

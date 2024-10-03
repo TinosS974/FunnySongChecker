@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 function Navbar({ userInfo }) {
-  const appTitle = "Song Checker";
+  const appTitle = "Spotify Checker";
   const navigate = useNavigate(); // Obtenez la fonction navigate
 
   const handleLogout = () => {
