@@ -35,7 +35,7 @@ function TopSongsSection() {
   if (loading) return <p>Loading top songs...</p>;
   if (error) return <p>Error fetching top songs: {error.message}</p>;
   return (
-    <div className="w-full p-8 bg-gray-800 rounded-lg mt-4 mb-12 border-solid border-2 border-black shadow-lg shadow-black">
+    <div className="w-full p-8 bg-gray-800 rounded-lg mt-4 mb-12 shadow-custom shadow-black">
       <h2 className="text-2xl font-bold mb-8 text-center neon-text">
         I Guess you like this songs
       </h2>
