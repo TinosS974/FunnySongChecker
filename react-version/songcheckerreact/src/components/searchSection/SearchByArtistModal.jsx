@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import ArtistTopTracks from "../ArtistTopTracks";
+import { AiOutlineClose } from "react-icons/ai";
 
 function SearchByArtistModal({ closeModal }) {
   const [query, setQuery] = useState("");
@@ -36,8 +37,8 @@ function SearchByArtistModal({ closeModal }) {
 
   const handleArtistSelect = (artist) => {
     setSelectedArtist(artist);
-    setQuery(""); // Clear the search input
-    setSuggestions([]); // Clear the suggestions
+    setQuery("");
+    setSuggestions([]);
   };
 
   return (
@@ -46,20 +47,22 @@ function SearchByArtistModal({ closeModal }) {
       onClick={closeModal}
     >
       <div
-        className="bg-white rounded-lg p-8 max-w-4xl w-full relative"
+        className="bg-gray-800 rounded-lg p-8 max-w-4xl w-full relative"
         onClick={(e) => e.stopPropagation()} // Empêche la fermeture lors d'un clic à l'intérieur
       >
         <button
           onClick={closeModal}
           className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
         >
-          X
+          <AiOutlineClose size={24} />
         </button>
-        <h2 className="text-2xl font-bold mb-4">Search for an Artist</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">
+          Search for an Artist
+        </h2>
         <input
           type="text"
           placeholder="Type an artist name"
-          className="input input-bordered w-full mb-4"
+          className="input input-bordered w-2/3 mb-4 bg-slate-400  placeholder-black"
           onChange={handleQuery}
           value={query}
         />
@@ -92,7 +95,9 @@ function SearchByArtistModal({ closeModal }) {
                   />
                 </div>
               </div>
-              <h2 className="text-xl font-bold">{selectedArtist.name}</h2>
+              <h2 className="text-xl font-bold text-white">
+                {selectedArtist.name}
+              </h2>
             </div>
             <ArtistTopTracks artistId={selectedArtist.id} />
           </div>

@@ -29,7 +29,7 @@ function RecentlyTrack() {
   if (state.error) return <p>Error fetching tracks: {state.error.message}</p>;
 
   return (
-    <div className="w-full lg:w-2/3 mx-auto p-5 bg-gradient-to-b from-gray-800 to-green-800  rounded-lg shadow-md">
+    <div className="w-full lg:w-2/3 mx-auto p-5 bg-gradient-to-b from-gray-800 to-green-800  rounded-lg shadow-md mb-11">
       <h1 className="text-3xl font-bold mb-4 text-center text-white">
         Recently Played Tracks
       </h1>
@@ -38,7 +38,7 @@ function RecentlyTrack() {
           {tracks.length > 0 ? (
             tracks.map((track, index) => (
               <div
-                key={`${track.id}-${track.played_at}`} // Clé unique utilisant l'ID et la date d'écoute
+                key={`${track.id}-${track.played_at}`}
                 id={`item${index}`}
                 className="carousel-item snap-center flex-shrink-0 w-60"
               >

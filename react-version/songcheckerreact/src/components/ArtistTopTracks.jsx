@@ -35,8 +35,11 @@ function ArtistTopTracks({ artistId }) {
       <h2 className="text-lg font-bold mb-4">Top Tracks</h2>
       {topTracks.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {topTracks.map((track) => (
-            <div key={track.id} className="card bg-gray-900 shadow-md p-4">
+          {topTracks.slice(0, 6).map((track) => (
+            <div
+              key={track.id}
+              className="card bg-gray-900 shadow-md p-4 hover:bg-gray-700"
+            >
               <div className="flex items-center mb-4">
                 <img
                   src={track.album.images[0]?.url}

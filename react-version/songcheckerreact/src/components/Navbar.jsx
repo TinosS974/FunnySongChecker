@@ -5,7 +5,7 @@ import SearchByArtistModal from "./searchSection/SearchByArtistModal";
 function Navbar({ userInfo }) {
   const appTitle = "Spotify Checker";
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false); // État pour gérer l'ouverture de la modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.setItem("spotifyToken", "");
@@ -22,8 +22,8 @@ function Navbar({ userInfo }) {
       </div>
       <div className="flex-none gap-2">
         <button
-          className="btn btn-outline text-white"
-          onClick={() => setIsModalOpen(true)} // Ouvrir la modal
+          className="btn btn-outline text-white w-48"
+          onClick={() => setIsModalOpen(true)}
         >
           Search Artist
         </button>
@@ -46,7 +46,7 @@ function Navbar({ userInfo }) {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-gray-600 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
               <a
@@ -59,10 +59,8 @@ function Navbar({ userInfo }) {
           </ul>
         </div>
       </div>
-
-      {/* Modal pour la recherche d'artiste */}
       {isModalOpen && (
-        <SearchByArtistModal closeModal={() => setIsModalOpen(false)} /> // Fermer la modal
+        <SearchByArtistModal closeModal={() => setIsModalOpen(false)} />
       )}
     </div>
   );

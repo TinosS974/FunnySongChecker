@@ -9,5 +9,40 @@
       0 0 40px #1DB954,
       0 0 120px #1DB954;
   }
+
+  .rainbow-shadow-button {
+    background-color: #000; /* Bouton noir */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 9999px; /* Pour avoir les bords bien arrondis */
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .rainbow-shadow-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 140%;
+    background: linear-gradient(45deg, #ff0080, #ff8c00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    filter: blur(20px);
+    transition: opacity 0.3s ease;
+  }
+  
+  .rainbow-shadow-button:hover::before {
+    opacity: 1;
+  }
+  
+  .rainbow-shadow-button:focus {
+    outline: none;
+  }
   
   
