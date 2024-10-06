@@ -97,7 +97,7 @@ function SearchByArtistModal({ closeModal }) {
               </div>
               <div className="flex items-center">
                 <h2 className="text-2xl font-bold text-white mr-2">
-                  {selectedArtist.name}
+                  {selectedArtist.name} 's top tracks
                 </h2>
                 <span
                   className={`badge ${
