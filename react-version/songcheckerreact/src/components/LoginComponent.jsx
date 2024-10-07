@@ -9,11 +9,22 @@ function LoginComponent() {
 
   useEffect(() => {
     const verifyToken = async () => {
+      // Récupérer le token de l'URL si présent
+      const params = new URLSearchParams(window.location.search);
+      const accessToken = params.get("access_token");
+
+      if (accessToken) {
+        localStorage.setItem("spotifyToken", accessToken);
+        navigate("/home");
+        return;
+      }
+
       const isValid = await checkToken(navigate);
       if (isValid) {
         navigate("/home");
       }
     };
+
     verifyToken();
   }, [navigate]);
 

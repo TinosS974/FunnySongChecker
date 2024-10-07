@@ -1,44 +1,26 @@
-import { useState } from "react";
-import axios from "axios";
-import { useAsync } from "react-use";
-
-function RecentlyTrack() {
-  const [tracks, setTracks] = useState([]);
-
-  const state = useAsync(async () => {
-    const token = localStorage.getItem("spotifyToken");
-    const response = await axios.get(
-      "http://localhost:5000/api/spotify/recently-played",
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-
-    if (response.data) {
-      const fetchedTracks = response.data.map((item) => ({
-        ...item.track,
-        played_at: item.played_at,
-      }));
-      setTracks(fetchedTracks);
-    } else {
-      setTracks([]);
-    }
-  }, []);
-
-  if (state.loading) return <p>Loading recently played tracks...</p>;
-  if (state.error) return <p>Error fetching tracks: {state.error.message}</p>;
+function RecentlyTrack({ recentlyPlayedTracks = [] }) {
+  console.log(recentlyPlayedTracks);
+  if (
+    !Array.isArray(recentlyPlayedTracks) ||
+    recentlyPlayedTracks.length === 0
+  ) {
+    return <p>No recently played tracks found.</p>;
+  }
 
   return (
-    <div className="w-full lg:w-2/3 mx-auto p-5 bg-gradient-to-b from-gray-800 to-green-800  rounded-lg shadow-md mb-11">
+    <div className="w-full lg:w-2/3 mx-auto p-5 bg-gradient-to-b from-gray-800 to-green-800 rounded-lg shadow-md mb-11">
       <h1 className="text-3xl font-bold mb-4 text-center text-white">
         Recently Played Tracks
       </h1>
       <div className="carousel space-x-4 p-4 rounded-box flex justify-center overflow-x-auto snap-x snap-mandatory">
         <div className="flex space-x-4">
-          {tracks.length > 0 ? (
-            tracks.map((track, index) => (
+          {recentlyPlayedTracks.map((item, index) => {
+            // Accéder à l'objet 'track' dans chaque élément
+            const track = item.track;
+
+            return (
               <div
-                key={`${track.id}-${track.played_at}`}
+                key={`${track.id}-${item.played_at}`}
                 id={`item${index}`}
                 className="carousel-item snap-center flex-shrink-0 w-60"
               >
@@ -59,7 +41,7 @@ function RecentlyTrack() {
                     </p>
                     <strong className="text-xs text-gray-400">
                       Played at:{" "}
-                      {new Date(track.played_at).toLocaleString(
+                      {new Date(item.played_at).toLocaleString(
                         navigator.language,
                         {
                           hour: "2-digit",
@@ -75,10 +57,8 @@ function RecentlyTrack() {
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <p className="text-white">No recently played tracks found.</p>
-          )}
+            );
+          })}
         </div>
       </div>
     </div>
