@@ -81,15 +81,15 @@ function HomePage() {
   return (
     <>
       <Navbar userInfo={userInfo} />
-      <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-6">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10">
+      <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-4 sm:p-6 md:p-8">
+        <div className="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           <div className="col-span-1">
             <TopArtistsSection topArtists={topArtists} loading={loading} />
           </div>
           <div className="col-span-1">
             <TopSongsSection topSongs={topSongs} loading={loading} />
           </div>
-          <div className="col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <RecentlyTrack
               recentlyPlayedTracks={recentlyPlayedTracks || []}
               loading={loading}

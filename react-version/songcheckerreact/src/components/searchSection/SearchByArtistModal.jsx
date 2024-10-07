@@ -47,7 +47,7 @@ function SearchByArtistModal({ closeModal }) {
       onClick={closeModal}
     >
       <div
-        className="bg-gray-800 rounded-lg p-8 max-w-4xl w-full relative"
+        className="bg-gray-800 rounded-lg p-4 sm:p-6 md:p-8 w-2/3 h-2/3 sm:w-2/3 lg:max-w-4xl relative max-h-2/3 overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -56,18 +56,18 @@ function SearchByArtistModal({ closeModal }) {
         >
           <AiOutlineClose size={24} />
         </button>
-        <h2 className="text-3xl font-bold mb-4 text-white">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-white">
           Search for an Artist
         </h2>
         <input
           type="text"
           placeholder="Type an artist name"
-          className="input input-bordered w-2/3 mb-4 bg-slate-400 placeholder-black"
+          className="input input-bordered w-full sm:w-3/4 mb-4 bg-slate-400 placeholder-black"
           onChange={handleQuery}
           value={query}
         />
         {suggestions.length > 0 && (
-          <ul className="menu bg-gradient-to-b from-gray-800 to-green-800 rounded-box shadow mb-4 max-h-48 overflow-x-auto overflow-y-hidden">
+          <ul className="menu bg-gradient-to-b from-gray-800 to-green-800 rounded-box shadow mb-4 max-h-48 overflow-y-auto">
             {suggestions.map((artist) => (
               <li
                 key={artist.id}
@@ -75,11 +75,11 @@ function SearchByArtistModal({ closeModal }) {
                 onClick={() => handleArtistSelect(artist)}
               >
                 <div className="avatar">
-                  <div className="w-20 h-20 rounded-full">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full">
                     <img src={artist.images[0]?.url} alt={artist.name} />
                   </div>
                 </div>
-                <div className="text-xl mt-2 text-center">{artist.name}</div>
+                <div className="text-lg mt-2 text-center">{artist.name}</div>
               </li>
             ))}
           </ul>
@@ -88,7 +88,7 @@ function SearchByArtistModal({ closeModal }) {
           <div className="mt-4">
             <div className="flex items-center mb-4">
               <div className="avatar mr-4">
-                <div className="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                   <img
                     src={selectedArtist.images[0]?.url}
                     alt={selectedArtist.name}
@@ -96,8 +96,8 @@ function SearchByArtistModal({ closeModal }) {
                 </div>
               </div>
               <div className="flex items-center">
-                <h2 className="text-2xl font-bold text-white mr-2">
-                  {selectedArtist.name} 's top tracks
+                <h2 className="text-lg sm:text-2xl font-bold text-white mr-2">
+                  {selectedArtist.name}'s top tracks
                 </h2>
                 <span
                   className={`badge ${
