@@ -58,10 +58,14 @@ exports.refreshAccessToken = async (refreshToken) => {
       },
     });
 
-    return {
-      accessToken: response.data.access_token,
-      expiresIn: response.data.expires_in,
-    };
+    if (response.data.access_token) {
+      return {
+        accessToken: response.data.access_token,
+        expiresIn: response.data.expires_in,
+      };
+    } else {
+      throw new Error('Invalid refresh token response from Spotify');
+    }
   } catch (error) {
     console.error('Error refreshing access token:', error.message);
     throw new Error('Failed to refresh access token');
