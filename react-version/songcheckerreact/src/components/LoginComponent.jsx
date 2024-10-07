@@ -5,15 +5,26 @@ import checkToken from "../utils/checkToken";
 function LoginComponent() {
   const navigate = useNavigate();
   const loginTxt = "Login now!";
-  const descTxt = `Connectez vous à votre compte spotify afin de commencer l'expérience`;
+  const descTxt = `Connectez-vous à votre compte Spotify afin de commencer l'expérience`;
 
   useEffect(() => {
     const verifyToken = async () => {
       const params = new URLSearchParams(window.location.search);
       const accessToken = params.get("access_token");
+      const refreshToken = params.get("refresh_token");
+      const expiresIn = params.get("expires_in");
 
-      if (accessToken) {
+      if (accessToken && refreshToken) {
+        const expiryTime = Date.now() + expiresIn * 1000;
+        const expiryDate = new Date(expiryTime);
+        const hours = expiryDate.getHours().toString().padStart(2, "0");
+        const minutes = expiryDate.getMinutes().toString().padStart(2, "0");
+        const formattedExpiryTime = `${hours}:${minutes}`;
+
         localStorage.setItem("spotifyToken", accessToken);
+        localStorage.setItem("spotifyRefreshToken", refreshToken);
+        localStorage.setItem("spotifyTokenExpiry", formattedExpiryTime);
+
         navigate("/home");
         return;
       }

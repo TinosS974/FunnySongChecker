@@ -5,6 +5,7 @@ import TopArtistsSection from "../components/TopSections/TopArtistsSection";
 import TopSongsSection from "../components/TopSections/TopSongsSection";
 import RecentlyTrack from "../components/TracksSections/RecentlyTrack";
 import { useNavigate } from "react-router-dom";
+import checkToken from "../utils/checkToken";
 
 function HomePage() {
   const [topArtists, setTopArtists] = useState([]);
@@ -20,54 +21,57 @@ function HomePage() {
     const accessToken = params.get("access_token");
 
     if (accessToken) {
+      const expiresIn = params.get("expires_in");
+      const expiryTime = Date.now() + expiresIn * 1000;
       localStorage.setItem("spotifyToken", accessToken);
+      localStorage.setItem("spotifyTokenExpiry", expiryTime);
       navigate("/home", { replace: true });
     }
 
-    const token = localStorage.getItem("spotifyToken");
+    const checkAndFetchData = async () => {
+      const isValid = await checkToken(navigate);
 
-    if (!token) {
-      setError("No token found. Please log in.");
-      setLoading(false);
-      return;
-    }
+      if (isValid) {
+        const token = localStorage.getItem("spotifyToken");
 
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [
-          artistsResponse,
-          songsResponse,
-          recentlyPlayedResponse,
-          userInfoResponse,
-        ] = await Promise.all([
-          axios.get("http://localhost:5000/api/spotify/top-artists", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://localhost:5000/api/spotify/user-top-tracks", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://localhost:5000/api/spotify/recently-played", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://localhost:5000/api/user", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
+        try {
+          setLoading(true);
+          const [
+            artistsResponse,
+            songsResponse,
+            recentlyPlayedResponse,
+            userInfoResponse,
+          ] = await Promise.all([
+            axios.get("http://localhost:5000/api/spotify/top-artists", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get("http://localhost:5000/api/spotify/user-top-tracks", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get("http://localhost:5000/api/spotify/recently-played", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get("http://localhost:5000/api/user", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
 
-        setTopArtists(artistsResponse.data);
-        setTopSongs(songsResponse.data);
-        setRecentlyPlayedTracks(recentlyPlayedResponse.data);
-        setUserInfo(userInfoResponse.data);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
+          setTopArtists(artistsResponse.data);
+          setTopSongs(songsResponse.data);
+          setRecentlyPlayedTracks(recentlyPlayedResponse.data);
+          setUserInfo(userInfoResponse.data);
+        } catch (err) {
+          console.error("Error fetching data:", err);
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setError("Invalid token, please log in again.");
       }
     };
 
-    fetchData();
+    checkAndFetchData();
   }, [navigate]);
 
   if (error) {
