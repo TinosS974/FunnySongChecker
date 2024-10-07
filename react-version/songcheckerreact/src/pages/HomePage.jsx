@@ -16,28 +16,22 @@ function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Récupérer le token de l'URL si présent
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("access_token");
 
     if (accessToken) {
-      // Stocker le token dans localStorage
       localStorage.setItem("spotifyToken", accessToken);
-
-      // Retirer le token de l'URL pour garder l'URL propre
       navigate("/home", { replace: true });
     }
 
     const token = localStorage.getItem("spotifyToken");
 
     if (!token) {
-      // Gestion de l'erreur si le token n'existe pas
       setError("No token found. Please log in.");
       setLoading(false);
       return;
     }
 
-    // Utiliser Promise.all pour effectuer tous les appels d'API en parallèle
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -76,10 +70,6 @@ function HomePage() {
     fetchData();
   }, [navigate]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -90,13 +80,16 @@ function HomePage() {
       <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-6">
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10">
           <div className="col-span-1">
-            <TopArtistsSection topArtists={topArtists} />
+            <TopArtistsSection topArtists={topArtists} loading={loading} />
           </div>
           <div className="col-span-1">
-            <TopSongsSection topSongs={topSongs} />
+            <TopSongsSection topSongs={topSongs} loading={loading} />
           </div>
           <div className="col-span-2">
-            <RecentlyTrack recentlyPlayedTracks={recentlyPlayedTracks || []} />
+            <RecentlyTrack
+              recentlyPlayedTracks={recentlyPlayedTracks || []}
+              loading={loading}
+            />
           </div>
         </div>
       </div>

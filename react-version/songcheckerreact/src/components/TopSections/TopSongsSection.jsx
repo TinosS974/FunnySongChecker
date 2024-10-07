@@ -1,4 +1,30 @@
-function TopSongsSection({ topSongs }) {
+import Skeleton from "../Skeleton";
+
+function TopSongsSection({ topSongs, loading }) {
+  if (loading) {
+    return (
+      <div className="p-8 mt-4 glass rounded-lg mx-auto">
+        <h1 className="text-5xl font-bold mb-8 text-center text-white">
+          Your Top Tracks
+        </h1>
+        <div className="grid grid-cols-4 gap-10">
+          {Array(4)
+            .fill()
+            .map((_, index) => (
+              <div
+                key={index}
+                className="card bg-gray-900 transition-colors duration-300 shadow-md rounded-lg flex flex-col items-center p-4"
+              >
+                <Skeleton className="w-32 h-32 rounded-full mb-4" />
+                <Skeleton className="w-3/4 h-6 mt-2" />
+                <Skeleton className="w-1/2 h-4 mt-2" />
+              </div>
+            ))}
+        </div>
+      </div>
+    );
+  }
+
   if (!topSongs || topSongs.length === 0) {
     return <p>No top songs found.</p>;
   }

@@ -3,7 +3,6 @@ import { useState } from "react";
 import SearchByArtistModal from "./searchSection/SearchByArtistModal";
 
 function Navbar({ userInfo }) {
-  console.log("frérot", userInfo);
   const appTitle = "Spotify Checker";
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
