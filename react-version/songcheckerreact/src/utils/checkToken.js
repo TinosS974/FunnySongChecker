@@ -8,7 +8,7 @@ const refreshAccessToken = async () => {
   }
 
   try {
-    const response = await axios.post("http://localhost:5000/api/refresh-token", {
+    const response = await axios.post(`${process.env.API_BASE_URL}/api/refresh-token`, {
       refresh_token: refreshToken,
     });
 

@@ -35,7 +35,8 @@ function LoginComponent() {
   }, [navigate]);
 
   const spotifyHandling = () => {
-    window.location.href = "http://localhost:5000/api/login";
+    const API_BASE_URL = process.env.API_BASE_URL;
+    window.location.href = `${API_BASE_URL}/api/login`;
   };
 
   return (

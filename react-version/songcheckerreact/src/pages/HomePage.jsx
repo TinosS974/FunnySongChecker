@@ -42,16 +42,22 @@ function HomePage() {
             recentlyPlayedResponse,
             userInfoResponse,
           ] = await Promise.all([
-            axios.get("http://localhost:5000/api/spotify/top-artists", {
+            axios.get(`${process.env.API_BASE_URL}/api/spotify/top-artists`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
-            axios.get("http://localhost:5000/api/spotify/user-top-tracks", {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-            axios.get("http://localhost:5000/api/spotify/recently-played", {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-            axios.get("http://localhost:5000/api/user", {
+            axios.get(
+              `${process.env.API_BASE_URL}/api/spotify/user-top-tracks`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            ),
+            axios.get(
+              `${process.env.API_BASE_URL}/api/spotify/recently-played`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            ),
+            axios.get(`${process.env.API_BASE_URL}/api/user`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
           ]);

@@ -29,9 +29,9 @@ function SearchByArtistModal({ closeModal }) {
 
       const token = localStorage.getItem("spotifyToken");
       const response = await axios.get(
-        `http://localhost:5000/api/spotify/search-artists?q=${encodeURIComponent(
-          value
-        )}`,
+        `${
+          process.env.API_BASE_URL
+        }/api/spotify/search-artists?q=${encodeURIComponent(value)}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

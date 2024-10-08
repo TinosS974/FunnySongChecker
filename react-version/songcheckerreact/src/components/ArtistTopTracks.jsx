@@ -19,7 +19,7 @@ function ArtistTopTracks({ artistId }) {
 
         const token = localStorage.getItem("spotifyToken");
         const response = await axios.get(
-          `http://localhost:5000/api/spotify/artist-top-tracks/${artistId}`,
+          `${process.env.API_BASE_URL}/api/spotify/artist-top-tracks/${artistId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

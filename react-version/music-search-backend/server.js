@@ -4,8 +4,16 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const front = process.env.FRONT_URI;
 
-app.use(cors());
+const corsOptions = {
+  origin: [front],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 const artistRoutes = require('./api/routes/artistRoute');

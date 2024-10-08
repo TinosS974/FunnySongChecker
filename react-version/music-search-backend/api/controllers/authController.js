@@ -17,7 +17,7 @@ exports.handleSpotifyCallback = async (req, res) => {
     const { accessToken, refreshToken, expiresIn } = await authService.exchangeCodeForToken(code);
 
     res.redirect(
-      `http://localhost:5173/home?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`
+      `${process.env.FRONT_URI}/home?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`
     );
   } catch (error) {
     console.error('Error during token exchange:', error.message);
