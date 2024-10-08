@@ -14,9 +14,8 @@ const refreshAccessToken = async () => {
 
     const { accessToken, expiresIn } = response.data;
 
-    const expiryTime = Date.now() + expiresIn * 1000;
     localStorage.setItem("spotifyToken", accessToken);
-    localStorage.setItem("spotifyTokenExpiry", expiryTime);
+    localStorage.setItem("spotifyTokenExpiry", Date.now() + expiresIn * 1000);
 
     return accessToken;
   } catch (error) {
@@ -25,16 +24,34 @@ const refreshAccessToken = async () => {
   }
 };
 
-const checkToken = async () => {
+const checkToken = async (navigate) => {
   const token = localStorage.getItem("spotifyToken");
   const tokenExpiry = localStorage.getItem("spotifyTokenExpiry");
 
   if (!token || Date.now() >= tokenExpiry) {
     const newToken = await refreshAccessToken();
-    return newToken;
+    if (!newToken) {
+      navigate("/");
+      return false;
+    }
+    return true;
   }
 
-  return token;
+  try {
+    await axios.get("https://api.spotify.com/v1/me", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return true;
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      const newToken = await refreshAccessToken();
+      if (!newToken) {
+        navigate("/");
+        return false;
+      }
+    }
+    return true;
+  }
 };
 
 export default checkToken;

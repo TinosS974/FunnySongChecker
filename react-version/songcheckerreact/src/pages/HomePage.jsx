@@ -25,8 +25,6 @@ function HomePage() {
       const expiryTime = Date.now() + expiresIn * 1000;
       localStorage.setItem("spotifyToken", accessToken);
       localStorage.setItem("spotifyTokenExpiry", expiryTime);
-      const expiryDate = new Date(expiryTime);
-      console.log(expiryDate.toLocaleString());
       navigate("/home", { replace: true });
     }
 
@@ -69,7 +67,10 @@ function HomePage() {
           setLoading(false);
         }
       } else {
-        setError("Invalid token, please log in again.");
+        setError("Invalid token, redirecting to login page...");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       }
     };
 
@@ -77,7 +78,11 @@ function HomePage() {
   }, [navigate]);
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="mt-20 flex flex-col items-center min-h-screen p-4">
+        <p className="text-red-500 text-center">{error}</p>
+      </div>
+    );
   }
 
   return (

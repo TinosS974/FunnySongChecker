@@ -3,7 +3,7 @@ import Skeleton from "../Skeleton";
 function RecentlyTrack({ recentlyPlayedTracks = [], loading }) {
   const handleRedirectToTrack = (trackId) => {
     const spotifyTrackUrl = `https://open.spotify.com/track/${trackId}`;
-    window.open(spotifyTrackUrl, "_blank"); // Opens the track in a new tab
+    window.open(spotifyTrackUrl, "_blank");
   };
 
   if (loading) {
@@ -35,7 +35,7 @@ function RecentlyTrack({ recentlyPlayedTracks = [], loading }) {
   }
 
   return (
-    <div className="w-full lg:w-2/3 mx-auto p-5 bg-gradient-to-b from-gray-800 to-green-800 rounded-lg shadow-md mb-11">
+    <div className="w-full lg:w-2/3 mx-auto p-5 glass rounded-lg shadow-md mb-11">
       <h1 className="text-3xl font-bold mb-4 text-center text-white">
         Recently Played Tracks
       </h1>
@@ -78,7 +78,7 @@ function RecentlyTrack({ recentlyPlayedTracks = [], loading }) {
                     <div className="card-actions justify-end">
                       <button
                         onClick={() => handleRedirectToTrack(track.id)}
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-success btn-sm text-black font-bold  hover:btn-accent"
                       >
                         Listen
                       </button>
