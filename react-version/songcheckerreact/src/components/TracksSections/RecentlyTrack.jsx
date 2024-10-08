@@ -1,6 +1,11 @@
 import Skeleton from "../Skeleton";
 
 function RecentlyTrack({ recentlyPlayedTracks = [], loading }) {
+  const handleRedirectToTrack = (trackId) => {
+    const spotifyTrackUrl = `https://open.spotify.com/track/${trackId}`;
+    window.open(spotifyTrackUrl, "_blank"); // Opens the track in a new tab
+  };
+
   if (loading) {
     return (
       <div className="w-full lg:w-2/3 mx-auto p-5 bg-gradient-to-b from-gray-800 to-green-800 rounded-lg shadow-md mb-11">
@@ -71,7 +76,10 @@ function RecentlyTrack({ recentlyPlayedTracks = [], loading }) {
                       )}
                     </strong>
                     <div className="card-actions justify-end">
-                      <button className="btn btn-cyan-600 btn-sm">
+                      <button
+                        onClick={() => handleRedirectToTrack(track.id)}
+                        className="btn btn-primary btn-sm"
+                      >
                         Listen
                       </button>
                     </div>

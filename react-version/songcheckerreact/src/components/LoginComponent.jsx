@@ -16,14 +16,10 @@ function LoginComponent() {
 
       if (accessToken && refreshToken) {
         const expiryTime = Date.now() + expiresIn * 1000;
-        const expiryDate = new Date(expiryTime);
-        const hours = expiryDate.getHours().toString().padStart(2, "0");
-        const minutes = expiryDate.getMinutes().toString().padStart(2, "0");
-        const formattedExpiryTime = `${hours}:${minutes}`;
 
         localStorage.setItem("spotifyToken", accessToken);
         localStorage.setItem("spotifyRefreshToken", refreshToken);
-        localStorage.setItem("spotifyTokenExpiry", formattedExpiryTime);
+        localStorage.setItem("spotifyTokenExpiry", expiryTime);
 
         navigate("/home");
         return;
@@ -39,7 +35,6 @@ function LoginComponent() {
   }, [navigate]);
 
   const spotifyHandling = () => {
-    console.log("Redirecting to Spotify login...");
     window.location.href = "http://localhost:5000/api/login";
   };
 

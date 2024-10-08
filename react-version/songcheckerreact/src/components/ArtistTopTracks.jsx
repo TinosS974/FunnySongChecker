@@ -1,13 +1,22 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import checkToken from "../utils/checkToken";
 
 function ArtistTopTracks({ artistId }) {
   const [topTracks, setTopTracks] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopTracks = async () => {
       try {
+        const isValid = await checkToken(navigate);
+        if (!isValid) {
+          console.error("Invalid or expired token.");
+          return;
+        }
+
         const token = localStorage.getItem("spotifyToken");
         const response = await axios.get(
           `http://localhost:5000/api/spotify/artist-top-tracks/${artistId}`,
@@ -26,7 +35,7 @@ function ArtistTopTracks({ artistId }) {
     if (artistId) {
       fetchTopTracks();
     }
-  }, [artistId]);
+  }, [artistId, navigate]);
 
   if (error) return <p>Error fetching top tracks: {error.message}</p>;
 

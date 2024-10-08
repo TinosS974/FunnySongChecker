@@ -2,11 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import ArtistTopTracks from "../ArtistTopTracks";
 import { AiOutlineClose } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import checkToken from "../../utils/checkToken";
 
 function SearchByArtistModal({ closeModal }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState(null);
+  const navigate = useNavigate();
 
   const handleQuery = async (event) => {
     const value = event.target.value;
@@ -18,6 +21,12 @@ function SearchByArtistModal({ closeModal }) {
     }
 
     try {
+      const isValid = await checkToken(navigate);
+      if (!isValid) {
+        console.error("Invalid or expired token.");
+        return;
+      }
+
       const token = localStorage.getItem("spotifyToken");
       const response = await axios.get(
         `http://localhost:5000/api/spotify/search-artists?q=${encodeURIComponent(
@@ -47,7 +56,7 @@ function SearchByArtistModal({ closeModal }) {
       onClick={closeModal}
     >
       <div
-        className="bg-gray-800 rounded-lg p-4 sm:p-6 md:p-8 w-2/3 h-2/3 sm:w-2/3 lg:max-w-4xl relative max-h-2/3 overflow-y-auto"
+        className="bg-gray-800 rounded-lg p-4 sm:p-6 md:p-8 w-full sm:w-3/4 lg:max-w-2xl max-h-2/3 overflow-y-auto relative"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -62,7 +71,7 @@ function SearchByArtistModal({ closeModal }) {
         <input
           type="text"
           placeholder="Type an artist name"
-          className="input input-bordered w-full sm:w-3/4 mb-4 bg-slate-400 placeholder-black"
+          className="input input-bordered w-full mb-4 bg-slate-400 placeholder-black"
           onChange={handleQuery}
           value={query}
         />
