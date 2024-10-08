@@ -35,6 +35,7 @@ function HomePage() {
         const token = localStorage.getItem("spotifyToken");
 
         try {
+          const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
           setLoading(true);
           const [
             artistsResponse,
@@ -42,22 +43,16 @@ function HomePage() {
             recentlyPlayedResponse,
             userInfoResponse,
           ] = await Promise.all([
-            axios.get(`${process.env.API_BASE_URL}/api/spotify/top-artists`, {
+            axios.get(`${API_BASE_URL}/api/spotify/top-artists`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
-            axios.get(
-              `${process.env.API_BASE_URL}/api/spotify/user-top-tracks`,
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            ),
-            axios.get(
-              `${process.env.API_BASE_URL}/api/spotify/recently-played`,
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            ),
-            axios.get(`${process.env.API_BASE_URL}/api/user`, {
+            axios.get(`${API_BASE_URL}/api/spotify/user-top-tracks`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get(`${API_BASE_URL}/api/spotify/recently-played`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get(`${API_BASE_URL}/api/user`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
           ]);
