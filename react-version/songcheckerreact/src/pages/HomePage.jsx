@@ -36,6 +36,7 @@ function HomePage() {
 
         try {
           const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+          console.log(API_BASE_URL);
           setLoading(true);
           const [
             artistsResponse,
