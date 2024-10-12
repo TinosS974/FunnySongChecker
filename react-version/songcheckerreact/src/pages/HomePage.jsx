@@ -25,7 +25,6 @@ function HomePage() {
       const expiryTime = Date.now() + expiresIn * 1000;
       localStorage.setItem("spotifyToken", accessToken);
       localStorage.setItem("spotifyTokenExpiry", expiryTime);
-      navigate("/home", { replace: true });
     }
 
     const checkAndFetchData = async () => {

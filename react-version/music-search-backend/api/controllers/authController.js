@@ -7,6 +7,7 @@ exports.redirectToSpotifyLogin = (req, res) => {
 
 exports.handleSpotifyCallback = async (req, res) => {
   const code = req.query.code;
+  console.log("Authorization code received:", code);
 
   if (!code) {
     console.log('No authorization code provided');
@@ -15,15 +16,17 @@ exports.handleSpotifyCallback = async (req, res) => {
 
   try {
     const { accessToken, refreshToken, expiresIn } = await authService.exchangeCodeForToken(code);
+    console.log("Tokens received:", { accessToken, refreshToken, expiresIn });
+    console.log("Redirection vers :", `${process.env.FRONT_URI}/home?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`);
 
-    res.redirect(
-      `${process.env.FRONT_URI}/home?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`
-    );
+    res.redirect(`${process.env.FRONT_URI}/home?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`);
+   
   } catch (error) {
     console.error('Error during token exchange:', error.message);
     res.status(500).send('Failed to authenticate with Spotify');
   }
 };
+
 
 exports.refreshToken = async (req, res) => {
   const refreshToken = req.body.refresh_token;
