@@ -19,7 +19,7 @@ exports.handleSpotifyCallback = async (req, res) => {
     console.log("Tokens received:", { accessToken, refreshToken, expiresIn });
     console.log("Redirection vers :", `${process.env.FRONT_URI}/home?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`);
 
-    res.redirect(`${process.env.FRONT_URI}/home?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`);
+    res.redirect(`${process.env.FRONT_URI}/?access_token=${accessToken}&refresh_token=${refreshToken}&expires_in=${expiresIn}`);
    
   } catch (error) {
     console.error('Error during token exchange:', error.message);
