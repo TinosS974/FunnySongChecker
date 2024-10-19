@@ -8,9 +8,9 @@ function Navbar({ userInfo }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.setItem("spotifyToken", "");
-    localStorage.setItem("spotifyTokenExpiry", "");
-    localStorage.setItem("spotifyRefreshToken", "");
+    localStorage.removeItem("spotifyRefreshToken");
+    localStorage.removeItem("spotifyToken");
+    localStorage.removeItem("spotifyTokenExpiry");
 
     navigate("/");
   };
