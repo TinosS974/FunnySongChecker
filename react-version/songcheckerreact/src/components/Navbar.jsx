@@ -9,6 +9,9 @@ function Navbar({ userInfo }) {
 
   const handleLogout = () => {
     localStorage.setItem("spotifyToken", "");
+    localStorage.setItem("spotifyTokenExpiry", "");
+    localStorage.setItem("spotifyRefreshToken", "");
+
     navigate("/");
   };
 
