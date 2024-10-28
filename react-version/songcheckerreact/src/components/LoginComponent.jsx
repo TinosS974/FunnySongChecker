@@ -36,7 +36,6 @@ function LoginComponent() {
 
   const spotifyHandling = () => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-    console.log("Redirecting to:", `${API_BASE_URL}/api/login`);
     window.location.href = `${API_BASE_URL}/api/login`;
   };
 

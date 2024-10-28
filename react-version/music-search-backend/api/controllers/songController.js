@@ -4,8 +4,6 @@ exports.getUserTopSongs = async (req, res) => {
     try {
       const accessToken = req.headers.authorization.split(' ')[1];
       const timeRange = req.params.timeRange || 'medium_term';
-      console.log('Access Token:', accessToken);
-      console.log('Time Range:', timeRange);
   
       const topSongs = await songService.getTopSongs(accessToken, timeRange);
       res.json(topSongs);

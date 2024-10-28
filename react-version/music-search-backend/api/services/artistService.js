@@ -7,7 +7,6 @@ exports.getTopArtists = async (accessToken, timeStamp) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log('Spotify API response (Top Artists):', response.data);
     return response.data.items;
   } catch (error) {
     if (error.response) {

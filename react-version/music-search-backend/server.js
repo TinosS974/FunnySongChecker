@@ -6,8 +6,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const front = process.env.FRONT_URI;
 
-console.log("Front URI:", front);
-
 const corsOptions = {
   origin: [front],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
