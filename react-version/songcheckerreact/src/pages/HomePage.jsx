@@ -14,7 +14,9 @@ function HomePage() {
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [timeRange, setTimeRange] = useState("medium_term");
+  const [artistTimeRange, setArtistTimeRange] = useState("medium_term");
+  const [songTimeRange, setSongTimeRange] = useState("medium_term");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,13 +32,13 @@ function HomePage() {
           const [topArtistsRes, topSongsRes, recentlyPlayedRes, userRes] =
             await Promise.all([
               axios.get(
-                `${API_BASE_URL}/api/spotify/top-artists/${timeRange}`,
+                `${API_BASE_URL}/api/spotify/top-artists/${artistTimeRange}`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
                 }
               ),
               axios.get(
-                `${API_BASE_URL}/api/spotify/user-top-tracks/${timeRange}`,
+                `${API_BASE_URL}/api/spotify/user-top-tracks/${songTimeRange}`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
                 }
@@ -68,11 +70,7 @@ function HomePage() {
     };
 
     fetchData();
-  }, [navigate, timeRange]);
-
-  const handleTimeRangeChange = (event) => {
-    setTimeRange(event.target.value);
-  };
+  }, [navigate, artistTimeRange, songTimeRange]);
 
   if (error) {
     return (
@@ -81,40 +79,30 @@ function HomePage() {
       </div>
     );
   }
-
   return (
     <>
       <Navbar userInfo={userInfo} />
       <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-4 sm:p-6 md:p-8">
         <div className="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-          <div className="time-range-selector col-span-1 lg:col-span-2 text-white">
-            <label
-              htmlFor="timeRange"
-              className="block mb-1 ml-2 font-semibold"
-            >
-              Select time range :
-            </label>
-            <select
-              id="timeRange"
-              value={timeRange}
-              onChange={handleTimeRangeChange}
-              className="bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150 ease-in-out hover:bg-gray-700"
-            >
-              <option value="short_term">Last 4 weeks</option>
-              <option value="medium_term">Last 6 months</option>
-              <option value="long_term">Last year</option>
-            </select>
-          </div>
-
           <div className="col-span-1">
-            <TopArtistsSection topArtists={topArtists} loading={loading} />
+            <TopArtistsSection
+              topArtists={topArtists}
+              loading={loading}
+              timeRange={artistTimeRange}
+              setTimeRange={setArtistTimeRange}
+            />
           </div>
           <div className="col-span-1">
-            <TopSongsSection topSongs={topSongs} loading={loading} />
+            <TopSongsSection
+              topSongs={topSongs}
+              loading={loading}
+              timeRange={songTimeRange}
+              setTimeRange={setSongTimeRange}
+            />
           </div>
           <div className="col-span-1 lg:col-span-2">
             <RecentlyTrack
-              recentlyPlayedTracks={recentlyPlayedTracks || []}
+              recentlyPlayedTracks={recentlyPlayedTracks}
               loading={loading}
             />
           </div>

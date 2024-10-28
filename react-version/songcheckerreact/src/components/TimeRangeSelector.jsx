@@ -1,6 +1,6 @@
 function TimeRangeSelector({ selectedRange, setSelectedRange }) {
   const ranges = [
-    { label: "4w", value: "short_term" },
+    { label: "4 weeks", value: "short_term" },
     { label: "6m", value: "medium_term" },
     { label: "1y", value: "long_term" },
   ];
@@ -13,7 +13,7 @@ function TimeRangeSelector({ selectedRange, setSelectedRange }) {
           onClick={() => setSelectedRange(range.value)}
           className={`mx-2 px-4 py-2 rounded-full font-semibold text-sm transition-colors duration-300 ${
             selectedRange === range.value
-              ? "bg-blue-500 text-white"
+              ? "bg-green-500 text-white"
               : "bg-gray-800 text-gray-400 hover:bg-gray-700"
           }`}
         >

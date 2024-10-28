@@ -1,23 +1,21 @@
-import { useState } from "react";
 import Skeleton from "../Skeleton";
 import TimeRangeSelector from "../TimeRangeSelector";
 
-function TopSongsSection({ topSongs, loading }) {
-  const [selectedRange, setSelectedRange] = useState("short_term");
-
+function TopSongsSection({ topSongs, loading, timeRange, setTimeRange }) {
   if (loading) {
     return (
       <div className="p-4 sm:p-6 md:p-8 mt-4 glass rounded-lg mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="font-bold mb-4 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center text-white mx-auto w-full mt-6">
             Your Top Tracks
           </h1>
-          {/*<TimeRangeSelector
-            selectedRange={selectedRange}
-            setSelectedRange={setSelectedRange}
+          <TimeRangeSelector
+            selectedRange={timeRange}
+            setSelectedRange={setTimeRange}
             className="ml-auto"
-          />*/}
+          />
         </div>
+
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {Array(4)
             .fill()
@@ -43,14 +41,14 @@ function TopSongsSection({ topSongs, loading }) {
   return (
     <div className="p-4 sm:p-6 md:p-8 mt-4 glass rounded-lg mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center text-white">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center text-white flex-grow">
           Your Top Tracks
         </h1>
-        {/*<TimeRangeSelector
-          selectedRange={selectedRange}
-          setSelectedRange={setSelectedRange}
-          className="ml-auto"
-        />*/}
+        <TimeRangeSelector
+          selectedRange={timeRange}
+          setSelectedRange={setTimeRange}
+          className="ml-4"
+        />
       </div>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
         {topSongs.map((song, index) => (
