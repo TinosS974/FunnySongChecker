@@ -1,12 +1,24 @@
+import { useState } from "react";
 import Skeleton from "../Skeleton";
+import TimeRangeSelector from "../TimeRangeSelector";
 
 function TopArtistsSection({ topArtists, loading }) {
+  const [selectedRange, setSelectedRange] = useState("short_term");
+
   if (loading) {
     return (
       <div className="p-4 sm:p-6 md:p-8 mt-4 glass rounded-lg mx-auto">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center text-white">
-          Your Top Artists
-        </h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center w-full">
+            Your Top Artists
+          </h2>
+          {/*<TimeRangeSelector
+            selectedRange={selectedRange}
+            setSelectedRange={setSelectedRange}
+            className="ml-auto"
+          />
+          */}
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {Array(4)
             .fill()
@@ -30,9 +42,16 @@ function TopArtistsSection({ topArtists, loading }) {
 
   return (
     <div className="p-4 sm:p-6 md:p-8 mt-4 glass rounded-lg mx-auto">
-      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center text-white">
-        Your Top Artists
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="font-bold text-white text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl w-full">
+          Your Top Artists
+        </h1>
+        {/*<TimeRangeSelector
+          selectedRange={selectedRange}
+          setSelectedRange={setSelectedRange}
+          className="ml-auto"
+        />*/}
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
         {topArtists.map((artist, index) => (
           <div

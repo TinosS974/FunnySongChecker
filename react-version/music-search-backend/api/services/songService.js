@@ -1,20 +1,26 @@
 const axios = require('axios');
 const { query } = require('express');
 
-exports.getTopSongs = async(accessToken) => {
+exports.getTopSongs = async (accessToken, timeStamp) => {
     try {
-        const response = await axios.get("https://api.spotify.com/v1/me/top/tracks?limit=12", {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-        return response.data.items;
-
+      const response = await axios.get(`https://api.spotify.com/v1/me/top/tracks?limit=12&time_range=${timeStamp}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log('Spotify API response (Top Songs):', response.data);
+      return response.data.items;
     } catch (error) {
-        throw new Error('Error fetching top tracks: ' + error.message)
-
+      if (error.response) {
+        console.error('Spotify API response error (Top Songs):', error.response.status, error.response.data);
+      } else if (error.request) {
+        console.error('No response from Spotify API:', error.request);
+      } else {
+        console.error('Error during Spotify API request setup:', error.message);
+      }
+      throw new Error('Error fetching top songs: ' + error.message);
     }
-}
+  };
 
 exports.getTracksRecentlyPlayed = async(accessToken, query) => {
     try {

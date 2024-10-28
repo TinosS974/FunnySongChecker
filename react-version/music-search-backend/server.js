@@ -6,7 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const front = process.env.FRONT_URI;
 
-console.log("Front uri :", front)
+console.log("Front URI:", front);
+
 const corsOptions = {
   origin: [front],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -14,13 +15,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
 
 const artistRoutes = require('./api/routes/artistRoute');
 const authRoutes = require('./api/routes/authRoute');
 const userRoutes = require('./api/routes/userRoute');
-const songRoutes = require('./api/routes/songRoute')
+const songRoutes = require('./api/routes/songRoute');
 
 app.use('/api/spotify', artistRoutes);
 app.use('/api', authRoutes);

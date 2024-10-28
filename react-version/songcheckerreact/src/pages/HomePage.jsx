@@ -11,56 +11,48 @@ function HomePage() {
   const [topArtists, setTopArtists] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
   const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useState([]);
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [timeRange, setTimeRange] = useState("medium_term");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const accessToken = params.get("access_token");
-
-    if (accessToken) {
-      const expiresIn = params.get("expires_in");
-      const expiryTime = Date.now() + expiresIn * 1000;
-      localStorage.setItem("spotifyToken", accessToken);
-      localStorage.setItem("spotifyTokenExpiry", expiryTime);
-    }
-
-    const checkAndFetchData = async () => {
+    const fetchData = async () => {
       const isValid = await checkToken(navigate);
 
       if (isValid) {
         const token = localStorage.getItem("spotifyToken");
+        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
         try {
-          const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-          console.log(API_BASE_URL);
           setLoading(true);
-          const [
-            artistsResponse,
-            songsResponse,
-            recentlyPlayedResponse,
-            userInfoResponse,
-          ] = await Promise.all([
-            axios.get(`${API_BASE_URL}/api/spotify/top-artists`, {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-            axios.get(`${API_BASE_URL}/api/spotify/user-top-tracks`, {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-            axios.get(`${API_BASE_URL}/api/spotify/recently-played`, {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-            axios.get(`${API_BASE_URL}/api/user`, {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-          ]);
+          const [topArtistsRes, topSongsRes, recentlyPlayedRes, userRes] =
+            await Promise.all([
+              axios.get(
+                `${API_BASE_URL}/api/spotify/top-artists/${timeRange}`,
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              ),
+              axios.get(
+                `${API_BASE_URL}/api/spotify/user-top-tracks/${timeRange}`,
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              ),
+              axios.get(`${API_BASE_URL}/api/spotify/recently-played`, {
+                headers: { Authorization: `Bearer ${token}` },
+              }),
+              axios.get(`${API_BASE_URL}/api/user`, {
+                headers: { Authorization: `Bearer ${token}` },
+              }),
+            ]);
 
-          setTopArtists(artistsResponse.data);
-          setTopSongs(songsResponse.data);
-          setRecentlyPlayedTracks(recentlyPlayedResponse.data);
-          setUserInfo(userInfoResponse.data);
+          setTopArtists(topArtistsRes.data);
+          setTopSongs(topSongsRes.data);
+          setRecentlyPlayedTracks(recentlyPlayedRes.data);
+          setUserInfo(userRes.data);
         } catch (err) {
           console.error("Error fetching data:", err);
           setError(err.message);
@@ -75,8 +67,12 @@ function HomePage() {
       }
     };
 
-    checkAndFetchData();
-  }, [navigate]);
+    fetchData();
+  }, [navigate, timeRange]);
+
+  const handleTimeRangeChange = (event) => {
+    setTimeRange(event.target.value);
+  };
 
   if (error) {
     return (
@@ -91,6 +87,25 @@ function HomePage() {
       <Navbar userInfo={userInfo} />
       <div className="mt-20 flex flex-col items-center bg-gradient-to-b from-gray-800 via-gray-900 to-black min-h-screen p-4 sm:p-6 md:p-8">
         <div className="w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+          <div className="time-range-selector col-span-1 lg:col-span-2 text-white">
+            <label
+              htmlFor="timeRange"
+              className="block mb-1 ml-2 font-semibold"
+            >
+              Select time range :
+            </label>
+            <select
+              id="timeRange"
+              value={timeRange}
+              onChange={handleTimeRangeChange}
+              className="bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150 ease-in-out hover:bg-gray-700"
+            >
+              <option value="short_term">Last 4 weeks</option>
+              <option value="medium_term">Last 6 months</option>
+              <option value="long_term">Last year</option>
+            </select>
+          </div>
+
           <div className="col-span-1">
             <TopArtistsSection topArtists={topArtists} loading={loading} />
           </div>

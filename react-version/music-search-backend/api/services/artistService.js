@@ -1,19 +1,17 @@
 const axios = require('axios');
 
-exports.getTopArtists = async (accessToken) => {
+exports.getTopArtists = async (accessToken, timeStamp) => {
   try {
-    const response = await axios.get("https://api.spotify.com/v1/me/top/artists?limit=12", {
+    const response = await axios.get(`https://api.spotify.com/v1/me/top/artists?limit=12&time_range=${timeStamp}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-
-    console.log('Spotify API response:', response.data);
+    console.log('Spotify API response (Top Artists):', response.data);
     return response.data.items;
-
   } catch (error) {
     if (error.response) {
-      console.error('Spotify API response error:', error.response.data);
+      console.error('Spotify API response error (Top Artists):', error.response.status, error.response.data);
     } else if (error.request) {
       console.error('No response from Spotify API:', error.request);
     } else {
@@ -22,6 +20,7 @@ exports.getTopArtists = async (accessToken) => {
     throw new Error('Error fetching top artists: ' + error.message);
   }
 };
+
 
 exports.searchArtists = async (accessToken, query) => {
     try {
