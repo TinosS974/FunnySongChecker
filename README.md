@@ -16,11 +16,34 @@
 
 ## Installation (optionnelle pour le développement local)
 
-1. Clonez le dépôt et installez les dépendances :
-   ```bash
-   git clone [URL_DU_DEPOT]
-   cd FunnySongChecker
-   Backend : music-search-backend -> npm install ->node server.js
-   Frontend : songcheckerreact -> npm install -> npm run dev
-   Vous pouvez vous creer des credentials Spotify et créer un env si vous souhaitez lancer le projet en local
-   ````
+1. **Clonez le dépôt et installez les dépendances :**
+   - **Accédez au dossier du projet :**
+     ```bash
+     cd FunnySongChecker
+     ```
+   - **Backend :**
+     1. Allez dans le dossier `music-search-backend`
+     2. Installez les dépendances :
+        ```bash
+        npm install
+        ```
+     3. Lancez le serveur :
+        ```bash
+        node server.js
+        ```
+   - **Frontend :**
+     1. Allez dans le dossier `songcheckerreact`
+     2. Installez les dépendances :
+        ```bash
+        npm install
+        ```
+     3. Lancez l’application :
+        ```bash
+        npm run dev
+        ```
+
+2. **Configurer les credentials Spotify :**
+   - Créez un compte développeur Spotify et obtenez vos credentials.
+   - Créez un fichier `.env` pour y ajouter vos credentials afin de lancer le projet en local.
+
+
